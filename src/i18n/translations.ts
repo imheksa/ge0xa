@@ -24,9 +24,9 @@ export const translations = {
       card2Title: "AI Gets It Wrong",
       card2Desc:
         "AI mentions wrong prices, outdated features, or false claims about your brand. You don't know until a customer complains.",
-      card3Title: "No Tools for Indonesia",
+      card3Title: "Zero Visibility Control",
       card3Desc:
-        "Global AI visibility tools don't understand Bahasa Indonesia, local context, or industry regulations that matter here.",
+        "You have no dashboard, no alerts, no way to know what AI is saying about you right now — across any language or market.",
     },
     solution: {
       label: "The Solution",
@@ -59,15 +59,15 @@ export const translations = {
     },
     features: {
       label: "Key Features",
-      title: "Built for Indonesian brands",
+      title: "Built for modern brands",
       f1Title: "Multi-Engine Monitoring",
       f1Desc: "ChatGPT, Perplexity, Gemini, and Google AI Overviews — all in one dashboard.",
       f2Title: "Canonical Facts",
       f2Desc:
         "Define your brand's source of truth. Get alerted when AI contradicts your official information.",
-      f3Title: "Bahasa Indonesia First",
+      f3Title: "Multilingual Intelligence",
       f3Desc:
-        "Queries, analysis, and reports optimized for Bahasa Indonesia and local market context.",
+        "Monitor and analyze AI responses across multiple languages and regional markets from a single platform.",
       f4Title: "Competitor Intelligence",
       f4Desc:
         "See where competitors appear and you don't. Find the gaps in your AI visibility.",
@@ -158,7 +158,7 @@ export const translations = {
       button: "Request Your Free Audit",
     },
     footer: {
-      tagline: "AI visibility platform for Indonesian brands.",
+      tagline: "AI visibility platform for modern brands.",
       product: "Product",
       company: "Company",
       monitoring: "Monitoring",
@@ -196,9 +196,9 @@ export const translations = {
       card2Title: "AI Menyampaikan Info Keliru",
       card2Desc:
         "AI menyebut harga salah, fitur usang, atau klaim keliru tentang brand Anda. Anda baru tahu saat pelanggan komplain.",
-      card3Title: "Belum Ada Tool untuk Indonesia",
+      card3Title: "Tanpa Kontrol Visibilitas",
       card3Desc:
-        "Tool visibilitas AI global tidak memahami Bahasa Indonesia, konteks lokal, atau regulasi industri yang relevan di sini.",
+        "Anda tidak punya dashboard, tidak ada alert, tidak ada cara untuk tahu apa yang AI katakan tentang Anda — di bahasa dan pasar manapun.",
     },
     solution: {
       label: "Solusinya",
@@ -231,15 +231,15 @@ export const translations = {
     },
     features: {
       label: "Fitur Utama",
-      title: "Dibangun untuk brand Indonesia",
+      title: "Dibangun untuk brand modern",
       f1Title: "Monitoring Multi-Engine",
       f1Desc: "ChatGPT, Perplexity, Gemini, dan Google AI Overviews — semua dalam satu dashboard.",
       f2Title: "Canonical Facts",
       f2Desc:
         "Tentukan sumber kebenaran brand Anda. Dapat notifikasi saat AI bertentangan dengan informasi resmi Anda.",
-      f3Title: "Bahasa Indonesia First",
+      f3Title: "Multilingual Intelligence",
       f3Desc:
-        "Query, analisis, dan laporan dioptimasi untuk Bahasa Indonesia dan konteks pasar lokal.",
+        "Pantau dan analisis respons AI di berbagai bahasa dan pasar regional dari satu platform.",
       f4Title: "Intelijen Kompetitor",
       f4Desc:
         "Lihat di mana kompetitor muncul dan Anda tidak. Temukan celah dalam visibilitas AI Anda.",
@@ -330,7 +330,7 @@ export const translations = {
       button: "Minta Audit Gratis Anda",
     },
     footer: {
-      tagline: "Platform visibilitas AI untuk brand Indonesia.",
+      tagline: "Platform visibilitas AI untuk brand modern.",
       product: "Produk",
       company: "Perusahaan",
       monitoring: "Monitoring",
