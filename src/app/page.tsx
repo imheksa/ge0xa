@@ -111,7 +111,7 @@ function Problem() {
   const cards = [
     { icon: <EyeOffIcon />, title: t.problem.card1Title, desc: t.problem.card1Desc },
     { icon: <AlertIcon />, title: t.problem.card2Title, desc: t.problem.card2Desc },
-    { icon: <GlobeIcon />, title: t.problem.card3Title, desc: t.problem.card3Desc },
+    { icon: <ChartIcon />, title: t.problem.card3Title, desc: t.problem.card3Desc },
   ];
   return (
     <section className="relative bg-gray-950 py-24 border-t border-white/5">
@@ -222,7 +222,7 @@ function Features() {
   const items = [
     { icon: <RadarIcon />, title: t.features.f1Title, desc: t.features.f1Desc },
     { icon: <ShieldIcon />, title: t.features.f2Title, desc: t.features.f2Desc },
-    { icon: <LangIcon />, title: t.features.f3Title, desc: t.features.f3Desc },
+    { icon: <GlobeIcon />, title: t.features.f3Title, desc: t.features.f3Desc },
     { icon: <SearchIcon />, title: t.features.f4Title, desc: t.features.f4Desc },
     { icon: <RocketIcon />, title: t.features.f5Title, desc: t.features.f5Desc },
     { icon: <ChartIcon />, title: t.features.f6Title, desc: t.features.f6Desc },
