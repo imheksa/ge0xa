@@ -2,40 +2,52 @@
 
 import { useI18n } from "@/i18n/context";
 
+function HexIcon({ className = "w-5 h-5" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className}>
+      <path d="M12 2L21.5 7.5V16.5L12 22L2.5 16.5V7.5L12 2Z" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
 function Navbar() {
   const { t, locale, toggleLocale } = useI18n();
   return (
-    <nav className="fixed top-0 z-50 w-full border-b border-slate-200 bg-white/80 backdrop-blur-md">
+    <nav className="fixed top-0 z-50 w-full border-b border-white/5 bg-gray-950/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <a href="#" className="text-xl font-bold tracking-tight">
-          <span className="text-indigo-600">Hexa</span>gent
+        <a href="#" className="flex items-center gap-2 text-xl font-bold tracking-tight">
+          <HexIcon className="w-6 h-6 text-cyan-400" />
+          <span>
+            <span className="text-gradient">Hexa</span>
+            <span className="text-white">gent</span>
+          </span>
         </a>
         <div className="hidden items-center gap-8 md:flex">
-          <a href="#features" className="text-sm text-slate-600 hover:text-slate-900">
+          <a href="#features" className="text-sm text-gray-400 hover:text-cyan-400 transition-colors">
             {t.nav.features}
           </a>
-          <a href="#pricing" className="text-sm text-slate-600 hover:text-slate-900">
+          <a href="#pricing" className="text-sm text-gray-400 hover:text-cyan-400 transition-colors">
             {t.nav.pricing}
           </a>
-          <a href="#contact" className="text-sm text-slate-600 hover:text-slate-900">
+          <a href="#contact" className="text-sm text-gray-400 hover:text-cyan-400 transition-colors">
             {t.nav.contact}
           </a>
           <button
             onClick={toggleLocale}
-            className="rounded-md border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50"
+            className="rounded-md border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-mono font-medium text-cyan-400 hover:bg-white/10 transition-colors"
           >
             {locale === "en" ? "ID" : "EN"}
           </button>
           <a
             href="#contact"
-            className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+            className="rounded-lg bg-gradient-to-r from-cyan-500 to-violet-500 px-4 py-2 text-sm font-medium text-white hover:from-cyan-400 hover:to-violet-400 transition-all"
           >
             {t.nav.getAudit}
           </a>
         </div>
         <button
           onClick={toggleLocale}
-          className="rounded-md border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-600 md:hidden"
+          className="rounded-md border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-mono font-medium text-cyan-400 md:hidden"
         >
           {locale === "en" ? "ID" : "EN"}
         </button>
@@ -47,37 +59,44 @@ function Navbar() {
 function Hero() {
   const { t } = useI18n();
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 to-indigo-50 pt-32 pb-20">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(99,102,241,0.08),transparent_50%)]" />
+    <section className="relative overflow-hidden bg-gray-950 pt-32 pb-24">
+      <div className="absolute inset-0 bg-grid animate-grid-fade" />
+      <div className="absolute top-20 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[128px]" />
+      <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-violet-500/10 rounded-full blur-[128px]" />
+
       <div className="relative mx-auto max-w-6xl px-6 text-center">
-        <div className="mb-6 inline-flex items-center rounded-full border border-indigo-200 bg-indigo-50 px-4 py-1.5 text-sm font-medium text-indigo-700">
+        <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/5 px-4 py-1.5 text-sm font-mono text-cyan-400">
+          <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse-glow" />
           {t.hero.tagline}
         </div>
-        <h1 className="mx-auto max-w-4xl text-4xl font-bold leading-tight tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
+        <h1 className="mx-auto max-w-4xl text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
           {t.hero.title}
-          <span className="text-indigo-600">{t.hero.titleHighlight}</span>
+          <span className="text-gradient">{t.hero.titleHighlight}</span>
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-600 leading-relaxed">
+        <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-400 leading-relaxed">
           {t.hero.subtitle}
         </p>
         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
           <a
             href="#contact"
-            className="rounded-lg bg-indigo-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-indigo-200 hover:bg-indigo-700"
+            className="group relative rounded-lg bg-gradient-to-r from-cyan-500 to-violet-500 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all"
           >
             {t.hero.cta}
           </a>
           <a
             href="#solution"
-            className="rounded-lg border border-slate-300 px-8 py-3.5 text-base font-semibold text-slate-700 hover:bg-white"
+            className="rounded-lg border border-white/10 bg-white/5 px-8 py-3.5 text-base font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-all"
           >
             {t.hero.ctaSecondary}
           </a>
         </div>
-        <div className="mt-16 flex flex-wrap items-center justify-center gap-8 text-sm text-slate-400">
-          <span className="font-medium">Monitors:</span>
-          {["ChatGPT", "Perplexity", "Gemini", "Google AI Overviews"].map((e) => (
-            <span key={e} className="rounded-full bg-white px-4 py-1.5 font-medium text-slate-600 shadow-sm">
+        <div className="mt-16 flex flex-wrap items-center justify-center gap-4 text-sm">
+          <span className="font-mono text-gray-500 uppercase tracking-wider text-xs">Monitors:</span>
+          {["ChatGPT", "Perplexity", "Gemini", "AI Overviews"].map((e) => (
+            <span
+              key={e}
+              className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 font-mono text-xs text-gray-400"
+            >
               {e}
             </span>
           ))}
@@ -90,30 +109,33 @@ function Hero() {
 function Problem() {
   const { t } = useI18n();
   const cards = [
-    { icon: "👻", title: t.problem.card1Title, desc: t.problem.card1Desc },
-    { icon: "⚠️", title: t.problem.card2Title, desc: t.problem.card2Desc },
-    { icon: "🌏", title: t.problem.card3Title, desc: t.problem.card3Desc },
+    { icon: <EyeOffIcon />, title: t.problem.card1Title, desc: t.problem.card1Desc },
+    { icon: <AlertIcon />, title: t.problem.card2Title, desc: t.problem.card2Desc },
+    { icon: <GlobeIcon />, title: t.problem.card3Title, desc: t.problem.card3Desc },
   ];
   return (
-    <section className="bg-white py-20">
-      <div className="mx-auto max-w-6xl px-6">
+    <section className="relative bg-gray-950 py-24 border-t border-white/5">
+      <div className="absolute inset-0 bg-dot-pattern opacity-30" />
+      <div className="relative mx-auto max-w-6xl px-6">
         <div className="text-center">
-          <span className="text-sm font-semibold uppercase tracking-wider text-red-500">
+          <span className="font-mono text-xs font-semibold uppercase tracking-widest text-red-400">
             {t.problem.label}
           </span>
-          <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
             {t.problem.title}
           </h2>
         </div>
-        <div className="mt-14 grid gap-8 md:grid-cols-3">
+        <div className="mt-14 grid gap-6 md:grid-cols-3">
           {cards.map((c) => (
             <div
               key={c.title}
-              className="rounded-xl border border-slate-200 bg-slate-50 p-8"
+              className="card-glow rounded-xl border border-white/5 bg-gray-900/50 p-8 backdrop-blur-sm hover:border-white/10 transition-all"
             >
-              <div className="text-3xl">{c.icon}</div>
-              <h3 className="mt-4 text-lg font-semibold text-slate-900">{c.title}</h3>
-              <p className="mt-2 text-slate-600 leading-relaxed">{c.desc}</p>
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-500/10 text-red-400">
+                {c.icon}
+              </div>
+              <h3 className="mt-5 text-lg font-semibold text-white">{c.title}</h3>
+              <p className="mt-2 text-gray-400 leading-relaxed">{c.desc}</p>
             </div>
           ))}
         </div>
@@ -125,33 +147,42 @@ function Problem() {
 function Solution() {
   const { t } = useI18n();
   const steps = [
-    { num: "01", label: t.solution.step1Label, title: t.solution.step1Title, desc: t.solution.step1Desc, color: "indigo" },
-    { num: "02", label: t.solution.step2Label, title: t.solution.step2Title, desc: t.solution.step2Desc, color: "rose" },
+    { num: "01", label: t.solution.step1Label, title: t.solution.step1Title, desc: t.solution.step1Desc, color: "cyan" },
+    { num: "02", label: t.solution.step2Label, title: t.solution.step2Title, desc: t.solution.step2Desc, color: "violet" },
     { num: "03", label: t.solution.step3Label, title: t.solution.step3Title, desc: t.solution.step3Desc, color: "emerald" },
     { num: "04", label: t.solution.step4Label, title: t.solution.step4Title, desc: t.solution.step4Desc, color: "amber" },
   ];
+  const colorMap: Record<string, string> = {
+    cyan: "text-cyan-400 bg-cyan-500/10 border-cyan-500/20",
+    violet: "text-violet-400 bg-violet-500/10 border-violet-500/20",
+    emerald: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
+    amber: "text-amber-400 bg-amber-500/10 border-amber-500/20",
+  };
   return (
-    <section id="solution" className="bg-slate-50 py-20">
+    <section id="solution" className="relative bg-gray-950 py-24 border-t border-white/5">
       <div className="mx-auto max-w-6xl px-6">
         <div className="text-center">
-          <span className="text-sm font-semibold uppercase tracking-wider text-indigo-600">
+          <span className="font-mono text-xs font-semibold uppercase tracking-widest text-cyan-400">
             {t.solution.label}
           </span>
-          <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
             {t.solution.title}
           </h2>
         </div>
-        <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {steps.map((s) => (
-            <div key={s.num} className="relative rounded-xl bg-white p-8 shadow-sm">
-              <div className="text-4xl font-bold text-indigo-100">{s.num}</div>
-              <span className="mt-2 inline-block rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold uppercase text-indigo-600">
-                {s.label}
-              </span>
-              <h3 className="mt-4 text-lg font-semibold text-slate-900">{s.title}</h3>
-              <p className="mt-2 text-sm text-slate-600 leading-relaxed">{s.desc}</p>
-            </div>
-          ))}
+        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {steps.map((s) => {
+            const colors = colorMap[s.color];
+            return (
+              <div key={s.num} className="card-glow rounded-xl border border-white/5 bg-gray-900/50 p-8 backdrop-blur-sm hover:border-white/10 transition-all">
+                <div className="font-mono text-4xl font-bold text-white/5">{s.num}</div>
+                <span className={`mt-2 inline-block rounded-full border px-3 py-1 font-mono text-xs font-semibold uppercase ${colors}`}>
+                  {s.label}
+                </span>
+                <h3 className="mt-4 text-lg font-semibold text-white">{s.title}</h3>
+                <p className="mt-2 text-sm text-gray-400 leading-relaxed">{s.desc}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -161,22 +192,23 @@ function Solution() {
 function Metrics() {
   const { t } = useI18n();
   const items = [
-    { label: t.metrics.soa, desc: t.metrics.soaDesc, value: "SoA" },
-    { label: t.metrics.accuracy, desc: t.metrics.accuracyDesc, value: "%" },
-    { label: t.metrics.citation, desc: t.metrics.citationDesc, value: "#" },
+    { label: t.metrics.soa, desc: t.metrics.soaDesc, value: "SoA", color: "text-cyan-400" },
+    { label: t.metrics.accuracy, desc: t.metrics.accuracyDesc, value: "%", color: "text-violet-400" },
+    { label: t.metrics.citation, desc: t.metrics.citationDesc, value: "#", color: "text-emerald-400" },
   ];
   return (
-    <section className="bg-indigo-600 py-16">
-      <div className="mx-auto max-w-6xl px-6">
+    <section className="relative border-y border-white/5 bg-gray-900/50 py-20">
+      <div className="absolute inset-0 bg-grid opacity-50" />
+      <div className="relative mx-auto max-w-6xl px-6">
         <h2 className="text-center text-2xl font-bold text-white sm:text-3xl">
           {t.metrics.title}
         </h2>
         <div className="mt-12 grid gap-8 md:grid-cols-3">
           {items.map((m) => (
             <div key={m.label} className="text-center">
-              <div className="text-4xl font-bold text-indigo-200">{m.value}</div>
-              <h3 className="mt-2 text-lg font-semibold text-white">{m.label}</h3>
-              <p className="mt-1 text-indigo-200">{m.desc}</p>
+              <div className={`font-mono text-5xl font-bold ${m.color}`}>{m.value}</div>
+              <h3 className="mt-3 text-lg font-semibold text-white">{m.label}</h3>
+              <p className="mt-1 text-gray-500">{m.desc}</p>
             </div>
           ))}
         </div>
@@ -188,30 +220,35 @@ function Metrics() {
 function Features() {
   const { t } = useI18n();
   const items = [
-    { icon: "📡", title: t.features.f1Title, desc: t.features.f1Desc },
-    { icon: "✅", title: t.features.f2Title, desc: t.features.f2Desc },
-    { icon: "🇮🇩", title: t.features.f3Title, desc: t.features.f3Desc },
-    { icon: "🔍", title: t.features.f4Title, desc: t.features.f4Desc },
-    { icon: "🚀", title: t.features.f5Title, desc: t.features.f5Desc },
-    { icon: "📊", title: t.features.f6Title, desc: t.features.f6Desc },
+    { icon: <RadarIcon />, title: t.features.f1Title, desc: t.features.f1Desc },
+    { icon: <ShieldIcon />, title: t.features.f2Title, desc: t.features.f2Desc },
+    { icon: <LangIcon />, title: t.features.f3Title, desc: t.features.f3Desc },
+    { icon: <SearchIcon />, title: t.features.f4Title, desc: t.features.f4Desc },
+    { icon: <RocketIcon />, title: t.features.f5Title, desc: t.features.f5Desc },
+    { icon: <ChartIcon />, title: t.features.f6Title, desc: t.features.f6Desc },
   ];
   return (
-    <section id="features" className="bg-white py-20">
+    <section id="features" className="relative bg-gray-950 py-24 border-t border-white/5">
       <div className="mx-auto max-w-6xl px-6">
         <div className="text-center">
-          <span className="text-sm font-semibold uppercase tracking-wider text-indigo-600">
+          <span className="font-mono text-xs font-semibold uppercase tracking-widest text-cyan-400">
             {t.features.label}
           </span>
-          <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
             {t.features.title}
           </h2>
         </div>
-        <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {items.map((f) => (
-            <div key={f.title} className="rounded-xl border border-slate-200 p-8 hover:shadow-md transition-shadow">
-              <div className="text-3xl">{f.icon}</div>
-              <h3 className="mt-4 text-lg font-semibold text-slate-900">{f.title}</h3>
-              <p className="mt-2 text-slate-600 leading-relaxed">{f.desc}</p>
+            <div
+              key={f.title}
+              className="card-glow group rounded-xl border border-white/5 bg-gray-900/50 p-8 backdrop-blur-sm hover:border-cyan-500/20 transition-all"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-400 group-hover:bg-cyan-500/20 transition-colors">
+                {f.icon}
+              </div>
+              <h3 className="mt-5 text-lg font-semibold text-white">{f.title}</h3>
+              <p className="mt-2 text-gray-400 leading-relaxed">{f.desc}</p>
             </div>
           ))}
         </div>
@@ -229,52 +266,55 @@ function Pricing() {
     { ...t.pricing.enterprise, popular: false },
   ];
   return (
-    <section id="pricing" className="bg-slate-50 py-20">
-      <div className="mx-auto max-w-6xl px-6">
+    <section id="pricing" className="relative bg-gray-950 py-24 border-t border-white/5">
+      <div className="absolute inset-0 bg-dot-pattern opacity-20" />
+      <div className="relative mx-auto max-w-6xl px-6">
         <div className="text-center">
-          <span className="text-sm font-semibold uppercase tracking-wider text-indigo-600">
+          <span className="font-mono text-xs font-semibold uppercase tracking-widest text-cyan-400">
             {t.pricing.label}
           </span>
-          <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
             {t.pricing.title}
           </h2>
-          <p className="mt-3 text-slate-600">{t.pricing.subtitle}</p>
+          <p className="mt-3 text-gray-400">{t.pricing.subtitle}</p>
         </div>
-        <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`relative rounded-xl bg-white p-8 shadow-sm ${
-                plan.popular ? "ring-2 ring-indigo-600" : "border border-slate-200"
+              className={`relative rounded-xl p-8 backdrop-blur-sm transition-all ${
+                plan.popular
+                  ? "border border-cyan-500/30 bg-gradient-to-b from-cyan-500/10 to-violet-500/10 shadow-lg shadow-cyan-500/10"
+                  : "border border-white/5 bg-gray-900/50 hover:border-white/10"
               }`}
             >
               {plan.popular && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-indigo-600 px-4 py-1 text-xs font-semibold text-white">
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-cyan-500 to-violet-500 px-4 py-1 text-xs font-semibold text-white">
                   Popular
                 </span>
               )}
-              <h3 className="text-lg font-semibold text-slate-900">{plan.name}</h3>
-              <p className="mt-1 text-sm text-slate-500">{plan.desc}</p>
+              <h3 className="text-lg font-semibold text-white">{plan.name}</h3>
+              <p className="mt-1 text-sm text-gray-500">{plan.desc}</p>
               <div className="mt-6">
-                <span className="text-2xl font-bold text-slate-900">{plan.price}</span>
+                <span className="text-2xl font-bold text-white">{plan.price}</span>
                 {"period" in plan && (
-                  <span className="text-sm text-slate-500">{plan.period}</span>
+                  <span className="text-sm text-gray-500">{plan.period}</span>
                 )}
               </div>
               <ul className="mt-6 space-y-3">
                 {plan.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2 text-sm text-slate-600">
-                    <span className="mt-0.5 text-indigo-600">✓</span>
+                  <li key={f} className="flex items-start gap-2 text-sm text-gray-400">
+                    <span className="mt-0.5 text-cyan-400">&#10003;</span>
                     {f}
                   </li>
                 ))}
               </ul>
               <a
                 href="#contact"
-                className={`mt-8 block rounded-lg py-2.5 text-center text-sm font-semibold ${
+                className={`mt-8 block rounded-lg py-2.5 text-center text-sm font-semibold transition-all ${
                   plan.popular
-                    ? "bg-indigo-600 text-white hover:bg-indigo-700"
-                    : "border border-slate-300 text-slate-700 hover:bg-slate-50"
+                    ? "bg-gradient-to-r from-cyan-500 to-violet-500 text-white hover:from-cyan-400 hover:to-violet-400"
+                    : "border border-white/10 text-gray-300 hover:bg-white/5 hover:text-white"
                 }`}
               >
                 {plan.cta}
@@ -290,32 +330,34 @@ function Pricing() {
 function Industries() {
   const { t } = useI18n();
   const items = [
-    { icon: "🏦", name: t.industries.finance },
-    { icon: "🏥", name: t.industries.health },
-    { icon: "🛒", name: t.industries.ecommerce },
-    { icon: "💻", name: t.industries.saas },
-    { icon: "⚖️", name: t.industries.professional },
-    { icon: "🎓", name: t.industries.education },
+    { icon: <BankIcon />, name: t.industries.finance },
+    { icon: <HealthIcon />, name: t.industries.health },
+    { icon: <CartIcon />, name: t.industries.ecommerce },
+    { icon: <CodeIcon />, name: t.industries.saas },
+    { icon: <BriefcaseIcon />, name: t.industries.professional },
+    { icon: <GradCapIcon />, name: t.industries.education },
   ];
   return (
-    <section className="bg-white py-20">
+    <section className="relative bg-gray-950 py-24 border-t border-white/5">
       <div className="mx-auto max-w-6xl px-6">
         <div className="text-center">
-          <span className="text-sm font-semibold uppercase tracking-wider text-indigo-600">
+          <span className="font-mono text-xs font-semibold uppercase tracking-widest text-cyan-400">
             {t.industries.label}
           </span>
-          <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
             {t.industries.title}
           </h2>
         </div>
-        <div className="mt-14 grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6">
+        <div className="mt-14 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
           {items.map((i) => (
             <div
               key={i.name}
-              className="flex flex-col items-center gap-3 rounded-xl border border-slate-200 p-6 text-center hover:shadow-md transition-shadow"
+              className="flex flex-col items-center gap-3 rounded-xl border border-white/5 bg-gray-900/50 p-6 text-center hover:border-cyan-500/20 transition-all"
             >
-              <span className="text-3xl">{i.icon}</span>
-              <span className="text-sm font-medium text-slate-700">{i.name}</span>
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-400">
+                {i.icon}
+              </div>
+              <span className="text-sm font-medium text-gray-300">{i.name}</span>
             </div>
           ))}
         </div>
@@ -327,13 +369,16 @@ function Industries() {
 function CTA() {
   const { t } = useI18n();
   return (
-    <section id="contact" className="bg-gradient-to-br from-indigo-600 to-indigo-800 py-20">
-      <div className="mx-auto max-w-3xl px-6 text-center">
+    <section id="contact" className="relative overflow-hidden border-t border-white/5 bg-gray-950 py-24">
+      <div className="absolute inset-0 bg-grid" />
+      <div className="absolute top-0 left-1/3 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[200px]" />
+      <div className="absolute bottom-0 right-1/3 w-[600px] h-[600px] bg-violet-500/10 rounded-full blur-[200px]" />
+      <div className="relative mx-auto max-w-3xl px-6 text-center">
         <h2 className="text-3xl font-bold text-white sm:text-4xl">{t.cta.title}</h2>
-        <p className="mt-4 text-lg text-indigo-200 leading-relaxed">{t.cta.subtitle}</p>
+        <p className="mt-4 text-lg text-gray-400 leading-relaxed">{t.cta.subtitle}</p>
         <a
           href="mailto:hello@hexagent.id"
-          className="mt-10 inline-block rounded-lg bg-white px-8 py-4 text-base font-semibold text-indigo-700 shadow-lg hover:bg-indigo-50"
+          className="mt-10 inline-block rounded-lg bg-gradient-to-r from-cyan-500 to-violet-500 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:from-cyan-400 hover:to-violet-400 transition-all"
         >
           {t.cta.button}
         </a>
@@ -345,37 +390,178 @@ function CTA() {
 function Footer() {
   const { t } = useI18n();
   return (
-    <footer className="border-t border-slate-200 bg-slate-50 py-12">
+    <footer className="border-t border-white/5 bg-gray-950 py-12">
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-8 md:grid-cols-4">
           <div className="md:col-span-2">
-            <span className="text-xl font-bold tracking-tight">
-              <span className="text-indigo-600">Hexa</span>gent
+            <span className="flex items-center gap-2 text-xl font-bold tracking-tight">
+              <HexIcon className="w-5 h-5 text-cyan-400" />
+              <span className="text-gradient">Hexa</span>
+              <span className="text-white">gent</span>
             </span>
-            <p className="mt-2 text-sm text-slate-500">{t.footer.tagline}</p>
+            <p className="mt-2 text-sm text-gray-500">{t.footer.tagline}</p>
           </div>
           <div>
-            <h4 className="text-sm font-semibold text-slate-900">{t.footer.product}</h4>
-            <ul className="mt-3 space-y-2 text-sm text-slate-500">
-              <li><a href="#features" className="hover:text-slate-700">{t.footer.monitoring}</a></li>
-              <li><a href="#features" className="hover:text-slate-700">{t.footer.distribution}</a></li>
-              <li><a href="#pricing" className="hover:text-slate-700">{t.footer.audit}</a></li>
+            <h4 className="font-mono text-xs font-semibold uppercase tracking-widest text-gray-400">{t.footer.product}</h4>
+            <ul className="mt-3 space-y-2 text-sm text-gray-500">
+              <li><a href="#features" className="hover:text-cyan-400 transition-colors">{t.footer.monitoring}</a></li>
+              <li><a href="#features" className="hover:text-cyan-400 transition-colors">{t.footer.distribution}</a></li>
+              <li><a href="#pricing" className="hover:text-cyan-400 transition-colors">{t.footer.audit}</a></li>
             </ul>
           </div>
           <div>
-            <h4 className="text-sm font-semibold text-slate-900">{t.footer.company}</h4>
-            <ul className="mt-3 space-y-2 text-sm text-slate-500">
-              <li><a href="#" className="hover:text-slate-700">{t.footer.about}</a></li>
-              <li><a href="#contact" className="hover:text-slate-700">{t.footer.contact}</a></li>
-              <li><a href="#" className="hover:text-slate-700">{t.footer.privacy}</a></li>
+            <h4 className="font-mono text-xs font-semibold uppercase tracking-widest text-gray-400">{t.footer.company}</h4>
+            <ul className="mt-3 space-y-2 text-sm text-gray-500">
+              <li><a href="#" className="hover:text-cyan-400 transition-colors">{t.footer.about}</a></li>
+              <li><a href="#contact" className="hover:text-cyan-400 transition-colors">{t.footer.contact}</a></li>
+              <li><a href="#" className="hover:text-cyan-400 transition-colors">{t.footer.privacy}</a></li>
             </ul>
           </div>
         </div>
-        <div className="mt-12 border-t border-slate-200 pt-6 text-center text-sm text-slate-400">
+        <div className="mt-12 border-t border-white/5 pt-6 text-center font-mono text-xs text-gray-600">
           &copy; {new Date().getFullYear()} Hexagent. {t.footer.rights}
         </div>
       </div>
     </footer>
+  );
+}
+
+function EyeOffIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+      <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24" />
+      <line x1="1" y1="1" x2="23" y2="23" />
+    </svg>
+  );
+}
+
+function AlertIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+      <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+      <line x1="12" y1="9" x2="12" y2="13" />
+      <line x1="12" y1="17" x2="12.01" y2="17" />
+    </svg>
+  );
+}
+
+function GlobeIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+      <circle cx="12" cy="12" r="10" />
+      <line x1="2" y1="12" x2="22" y2="12" />
+      <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+    </svg>
+  );
+}
+
+function RadarIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+      <circle cx="12" cy="12" r="10" />
+      <circle cx="12" cy="12" r="6" />
+      <circle cx="12" cy="12" r="2" />
+      <line x1="12" y1="2" x2="12" y2="12" />
+    </svg>
+  );
+}
+
+function ShieldIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      <path d="M9 12l2 2 4-4" />
+    </svg>
+  );
+}
+
+function LangIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+      <path d="M5 8l6 6M4 14l6-6 2-3M2 5h12M7 2h1" />
+      <path d="M22 22l-5-10-5 10M14 18h6" />
+    </svg>
+  );
+}
+
+function SearchIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+      <circle cx="11" cy="11" r="8" />
+      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+    </svg>
+  );
+}
+
+function RocketIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+      <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z" />
+      <path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z" />
+      <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+    </svg>
+  );
+}
+
+function ChartIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+      <line x1="18" y1="20" x2="18" y2="10" />
+      <line x1="12" y1="20" x2="12" y2="4" />
+      <line x1="6" y1="20" x2="6" y2="14" />
+    </svg>
+  );
+}
+
+function BankIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+      <path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3" />
+    </svg>
+  );
+}
+
+function HealthIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+      <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+    </svg>
+  );
+}
+
+function CartIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+      <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
+      <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6" />
+    </svg>
+  );
+}
+
+function CodeIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+      <polyline points="16,18 22,12 16,6" /><polyline points="8,6 2,12 8,18" />
+    </svg>
+  );
+}
+
+function BriefcaseIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+      <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+      <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16" />
+    </svg>
+  );
+}
+
+function GradCapIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+      <path d="M22 10l-10-5L2 10l10 5 10-5z" />
+      <path d="M6 12v5c3 3 9 3 12 0v-5" />
+      <line x1="22" y1="10" x2="22" y2="16" />
+    </svg>
   );
 }
 
