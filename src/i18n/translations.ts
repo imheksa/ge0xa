@@ -12,7 +12,7 @@ export const translations = {
       titleHighlight: "correctly.",
       subtitle:
         "Monitor how ChatGPT, Perplexity, Gemini, and Google AI Overviews represent your brand. Detect misinformation. Become the trusted answer.",
-      cta: "Request Your Brand Audit",
+      cta: "Signup Today",
       ctaSecondary: "See How It Works",
     },
     problem: {
@@ -154,8 +154,8 @@ export const translations = {
     cta: {
       title: "Is AI telling the truth about your brand?",
       subtitle:
-        "Get your free Brand Audit and find out exactly how AI engines see you — and where you're invisible.",
-      button: "Request Your Free Audit",
+        "Sign up now and find out exactly how AI engines see you — and where you're invisible.",
+      button: "Signup Today",
     },
     footer: {
       tagline: "AI visibility platform for modern brands.",
@@ -184,7 +184,7 @@ export const translations = {
       titleHighlight: "dengan benar.",
       subtitle:
         "Pantau bagaimana ChatGPT, Perplexity, Gemini, dan Google AI Overviews menampilkan brand Anda. Deteksi misinformasi. Jadilah jawaban terpercaya.",
-      cta: "Minta Audit Brand Anda",
+      cta: "Daftar Sekarang",
       ctaSecondary: "Lihat Cara Kerjanya",
     },
     problem: {
@@ -326,8 +326,8 @@ export const translations = {
     cta: {
       title: "Apakah AI menyampaikan kebenaran tentang brand Anda?",
       subtitle:
-        "Dapatkan Audit Brand gratis dan cari tahu persis bagaimana mesin AI melihat Anda — dan di mana Anda tidak terlihat.",
-      button: "Minta Audit Gratis Anda",
+        "Daftar sekarang dan cari tahu persis bagaimana mesin AI melihat Anda — dan di mana Anda tidak terlihat.",
+      button: "Daftar Sekarang",
     },
     footer: {
       tagline: "Platform visibilitas AI untuk brand modern.",

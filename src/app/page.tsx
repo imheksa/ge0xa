@@ -93,7 +93,7 @@ function Hero() {
         </p>
         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
           <a
-            href="#contact"
+            href="/ge0xa/login"
             className="group relative rounded-lg bg-gradient-to-r from-cyan-500 to-violet-500 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all"
           >
             {t.hero.cta}
@@ -392,7 +392,7 @@ function CTA() {
         <h2 className="text-3xl font-bold text-white sm:text-4xl">{t.cta.title}</h2>
         <p className="mt-4 text-lg text-gray-400 leading-relaxed">{t.cta.subtitle}</p>
         <a
-          href="mailto:hello@hexagent.id"
+          href="/ge0xa/login"
           className="mt-10 inline-block rounded-lg bg-gradient-to-r from-cyan-500 to-violet-500 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:from-cyan-400 hover:to-violet-400 transition-all"
         >
           {t.cta.button}
