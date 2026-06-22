@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useI18n } from "@/i18n/context";
 
 function HexIcon({ className = "w-5 h-5" }: { className?: string }) {
@@ -571,22 +571,13 @@ function GradCapIcon() {
 
 function QuickScan() {
   const [brand, setBrand] = useState("");
-  const [phase, setPhase] = useState<"idle" | "scanning" | "done">("idle");
+  const [phase, setPhase] = useState<"idle" | "scanning">("idle");
   const [scanProgress, setScanProgress] = useState(0);
-  const [results, setResults] = useState({ soa: 0, accuracy: 0, citation: 0, engines: 0 });
 
   function startScan() {
     if (!brand.trim()) return;
     setPhase("scanning");
     setScanProgress(0);
-
-    const seed = brand.trim().length;
-    const finalResults = {
-      soa: 15 + (seed * 7) % 35,
-      accuracy: 45 + (seed * 11) % 40,
-      citation: 5 + (seed * 3) % 25,
-      engines: 1 + (seed % 3),
-    };
 
     let progress = 0;
     const interval = setInterval(() => {
@@ -596,19 +587,12 @@ function QuickScan() {
         clearInterval(interval);
         setScanProgress(100);
         setTimeout(() => {
-          setResults(finalResults);
-          setPhase("done");
+          window.location.href = `/ge0xa/dashboard?brand=${encodeURIComponent(brand.trim())}`;
         }, 400);
       } else {
         setScanProgress(Math.round(progress));
       }
     }, 300);
-  }
-
-  function reset() {
-    setPhase("idle");
-    setBrand("");
-    setScanProgress(0);
   }
 
   return (
@@ -675,55 +659,6 @@ function QuickScan() {
             </div>
           )}
 
-          {phase === "done" && (
-            <div className="space-y-6">
-              <div className="rounded-xl border border-white/5 bg-gray-900/50 p-8">
-                <div className="flex items-center justify-between mb-6">
-                  <div>
-                    <h3 className="text-lg font-semibold text-white">{brand}</h3>
-                    <p className="text-xs text-gray-500 font-mono">AI Visibility Snapshot</p>
-                  </div>
-                  <button onClick={reset} className="text-xs text-gray-500 hover:text-gray-300 transition-colors">
-                    ← Scan another
-                  </button>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-                  <ScanMetric label="Share of Answer" value={`${results.soa}%`} color="text-cyan-400" status={results.soa > 30 ? "ok" : "low"} />
-                  <ScanMetric label="Accuracy" value={`${results.accuracy}%`} color="text-violet-400" status={results.accuracy > 70 ? "ok" : "warning"} />
-                  <ScanMetric label="Citation Rate" value={`${results.citation}%`} color="text-emerald-400" status={results.citation > 15 ? "ok" : "low"} />
-                  <ScanMetric label="Engines Found" value={`${results.engines}/4`} color="text-amber-400" status={results.engines >= 3 ? "ok" : "warning"} />
-                </div>
-
-                <div className="mt-6 space-y-3">
-                  <div className="flex items-center gap-3 rounded-lg border border-white/5 bg-gray-950/50 px-4 py-3">
-                    <span className="h-2 w-2 rounded-full bg-red-400" />
-                    <span className="text-sm text-gray-300">Low AI visibility — competitors may dominate your category</span>
-                  </div>
-                  <div className="flex items-center gap-3 rounded-lg border border-white/5 bg-gray-950/50 px-4 py-3">
-                    <span className="h-2 w-2 rounded-full bg-amber-400" />
-                    <span className="text-sm text-gray-300">Potential misinformation detected in {4 - results.engines} engine(s)</span>
-                  </div>
-                  <div className="flex items-center gap-3 rounded-lg border border-white/5 bg-gray-950/50 px-4 py-3">
-                    <span className="h-2 w-2 rounded-full bg-cyan-400" />
-                    <span className="text-sm text-gray-300">Full audit needed to uncover detailed accuracy issues</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="text-center">
-                <a
-                  href="#contact"
-                  className="inline-block rounded-lg bg-gradient-to-r from-cyan-500 to-violet-500 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:from-cyan-400 hover:to-violet-400 transition-all"
-                >
-                  Subscribe for Detail Report
-                </a>
-                <p className="mt-3 text-xs text-gray-500">
-                  Get a full breakdown of AI responses, misinformation alerts, and competitor analysis.
-                </p>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </section>
@@ -739,22 +674,6 @@ function ScanStep({ label, done }: { label: string; done: boolean }) {
         <span className="h-3 w-3 rounded-full border border-gray-600 animate-pulse" />
       )}
       <span className={`text-xs font-mono ${done ? "text-gray-400" : "text-gray-600"}`}>{label}</span>
-    </div>
-  );
-}
-
-function ScanMetric({ label, value, color, status }: { label: string; value: string; color: string; status: string }) {
-  return (
-    <div className="rounded-lg border border-white/5 bg-gray-950/50 p-4 text-center">
-      <p className="text-xs font-mono text-gray-500 uppercase tracking-wider">{label}</p>
-      <p className={`mt-2 text-2xl font-bold ${color}`}>{value}</p>
-      <span className={`mt-1 inline-block rounded-full px-2 py-0.5 text-[10px] font-mono ${
-        status === "ok" ? "bg-emerald-500/10 text-emerald-400" :
-        status === "warning" ? "bg-amber-500/10 text-amber-400" :
-        "bg-red-500/10 text-red-400"
-      }`}>
-        {status === "ok" ? "Good" : status === "warning" ? "Needs Work" : "Low"}
-      </span>
     </div>
   );
 }

@@ -1,69 +1,128 @@
 "use client";
 
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
-const BRAND = "Acme Fintech";
+function hash(str: string): number {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) {
+    h = ((h << 5) - h + str.charCodeAt(i)) | 0;
+  }
+  return Math.abs(h);
+}
 
-const summaryCards = [
-  { label: "Brand Score", value: "72", change: "+5", unit: "/100", color: "text-cyan-400", bg: "bg-cyan-500/10" },
-  { label: "Share of Answer", value: "34", change: "+8", unit: "%", color: "text-violet-400", bg: "bg-violet-500/10" },
-  { label: "Accuracy Score", value: "81", change: "-2", unit: "%", color: "text-emerald-400", bg: "bg-emerald-500/10" },
-  { label: "Citation Rate", value: "19", change: "+3", unit: "%", color: "text-amber-400", bg: "bg-amber-500/10" },
-];
+function generateData(brand: string) {
+  const s = hash(brand);
+  const brandScore = 35 + (s % 45);
+  const soa = 10 + (s % 40);
+  const accuracy = 50 + ((s * 3) % 40);
+  const citation = 5 + ((s * 7) % 25);
 
-const engines = [
-  { name: "ChatGPT", status: "mentioned", accuracy: 78, soa: 41, lastChecked: "2 min ago", icon: "G" },
-  { name: "Perplexity", status: "mentioned", accuracy: 85, soa: 52, lastChecked: "5 min ago", icon: "P" },
-  { name: "Gemini", status: "not_found", accuracy: 0, soa: 0, lastChecked: "3 min ago", icon: "Gm" },
-  { name: "AI Overviews", status: "mentioned", accuracy: 91, soa: 28, lastChecked: "8 min ago", icon: "AO" },
-];
+  const summaryCards = [
+    { label: "Brand Score", value: String(brandScore), change: `+${1 + (s % 8)}`, unit: "/100", color: "text-cyan-400", bg: "bg-cyan-500/10" },
+    { label: "Share of Answer", value: String(soa), change: `+${1 + ((s * 2) % 10)}`, unit: "%", color: "text-violet-400", bg: "bg-violet-500/10" },
+    { label: "Accuracy Score", value: String(accuracy), change: accuracy > 70 ? `+${1 + (s % 4)}` : `-${1 + (s % 5)}`, unit: "%", color: "text-emerald-400", bg: "bg-emerald-500/10" },
+    { label: "Citation Rate", value: String(citation), change: `+${1 + ((s * 5) % 6)}`, unit: "%", color: "text-amber-400", bg: "bg-amber-500/10" },
+  ];
 
-const alerts = [
-  { id: 1, severity: "high", engine: "ChatGPT", query: "best fintech apps Indonesia", issue: "States incorrect founding year (2019 instead of 2021)", time: "12 min ago" },
-  { id: 2, severity: "high", engine: "ChatGPT", query: "Acme Fintech fees", issue: "Claims monthly fee of $9.99 — actual price is free tier available", time: "25 min ago" },
-  { id: 3, severity: "medium", engine: "Perplexity", query: "digital payment comparison", issue: "Lists deprecated feature 'InstaPay' as current offering", time: "1 hr ago" },
-  { id: 4, severity: "low", engine: "AI Overviews", query: "Acme Fintech review", issue: "Missing mention of ISO 27001 certification", time: "2 hr ago" },
-  { id: 5, severity: "medium", engine: "ChatGPT", query: "fintech security comparison", issue: "Does not mention 2FA support, implies basic security only", time: "3 hr ago" },
-];
+  const engineBase = [
+    { name: "ChatGPT", icon: "G", lastChecked: "2 min ago" },
+    { name: "Perplexity", icon: "P", lastChecked: "5 min ago" },
+    { name: "Gemini", icon: "Gm", lastChecked: "3 min ago" },
+    { name: "AI Overviews", icon: "AO", lastChecked: "8 min ago" },
+  ];
+  const missingIdx = s % 4;
+  const engines = engineBase.map((e, i) => ({
+    ...e,
+    status: i === missingIdx ? "not_found" as const : "mentioned" as const,
+    accuracy: i === missingIdx ? 0 : 60 + ((s * (i + 1) * 3) % 35),
+    soa: i === missingIdx ? 0 : 15 + ((s * (i + 1) * 7) % 40),
+  }));
 
-const soaTrend = [
-  { week: "W1", you: 18, competitor: 45 },
-  { week: "W2", you: 22, competitor: 43 },
-  { week: "W3", you: 25, competitor: 41 },
-  { week: "W4", you: 28, competitor: 40 },
-  { week: "W5", you: 31, competitor: 38 },
-  { week: "W6", you: 34, competitor: 36 },
-];
+  const severities = ["high", "high", "medium", "low", "medium"];
+  const engineNames = ["ChatGPT", "Perplexity", "Gemini", "AI Overviews"];
+  const issueTemplates = [
+    `States incorrect founding year for ${brand}`,
+    `Claims wrong pricing information about ${brand}`,
+    `Lists outdated features as current for ${brand}`,
+    `Missing key certification or compliance info for ${brand}`,
+    `Does not mention core security features of ${brand}`,
+  ];
+  const queryTemplates = [
+    `best ${brand.toLowerCase()} alternatives`,
+    `${brand} pricing`,
+    `${brand.toLowerCase()} vs competitors`,
+    `${brand} review`,
+    `is ${brand.toLowerCase()} reliable`,
+  ];
+  const times = ["12 min ago", "25 min ago", "1 hr ago", "2 hr ago", "3 hr ago"];
+  const alerts = issueTemplates.map((issue, i) => ({
+    id: i + 1,
+    severity: severities[i],
+    engine: engineNames[(s + i) % 4],
+    query: queryTemplates[i],
+    issue,
+    time: times[i],
+  }));
 
-const topQueries = [
-  { query: "best fintech apps", mentions: 12, accuracy: 85, trend: "up" },
-  { query: "digital payment Indonesia", mentions: 8, accuracy: 72, trend: "up" },
-  { query: "Acme Fintech review", mentions: 6, accuracy: 91, trend: "stable" },
-  { query: "fintech comparison 2026", mentions: 5, accuracy: 68, trend: "down" },
-  { query: "secure payment apps", mentions: 4, accuracy: 77, trend: "up" },
-];
+  const baseSoa = 8 + (s % 15);
+  const soaTrend = [
+    { week: "W1", you: baseSoa, competitor: 40 + (s % 10) },
+    { week: "W2", you: baseSoa + 3, competitor: 39 + (s % 10) },
+    { week: "W3", you: baseSoa + 6, competitor: 38 + (s % 10) },
+    { week: "W4", you: baseSoa + 10, competitor: 37 + (s % 10) },
+    { week: "W5", you: baseSoa + 13, competitor: 36 + (s % 10) },
+    { week: "W6", you: soa, competitor: 35 + (s % 10) },
+  ];
 
-const canonicalFacts = [
-  { fact: "Founded in 2021", status: "violated", violations: 2 },
-  { fact: "Free tier available", status: "violated", violations: 1 },
-  { fact: "ISO 27001 certified", status: "missing", violations: 1 },
-  { fact: "2FA authentication", status: "missing", violations: 1 },
-  { fact: "500K+ active users", status: "accurate", violations: 0 },
-  { fact: "Licensed by OJK", status: "accurate", violations: 0 },
-];
+  const topQueries = [
+    { query: `best ${brand.toLowerCase()} alternatives`, mentions: 8 + (s % 8), accuracy: 70 + ((s * 3) % 25), trend: "up" },
+    { query: `${brand} review`, mentions: 5 + ((s * 2) % 6), accuracy: 60 + ((s * 7) % 30), trend: "up" },
+    { query: `${brand.toLowerCase()} pricing`, mentions: 3 + ((s * 4) % 5), accuracy: 55 + ((s * 11) % 35), trend: "stable" },
+  ];
+
+  const factStatuses = ["violated", "violated", "missing", "missing", "accurate", "accurate"];
+  const factTemplates = [
+    `Founded in ${2018 + (s % 6)}`,
+    "Free tier available",
+    "ISO 27001 certified",
+    "Enterprise-grade security",
+    `${100 + (s % 900)}K+ active users`,
+    "Industry compliance verified",
+  ];
+  const canonicalFacts = factTemplates.map((fact, i) => ({
+    fact,
+    status: factStatuses[i],
+    violations: factStatuses[i] === "accurate" ? 0 : 1 + (s % 2),
+  }));
+
+  return { summaryCards, engines, alerts, soaTrend, topQueries, canonicalFacts };
+}
 
 type Tab = "overview" | "engines" | "alerts" | "facts";
 
 export default function Dashboard() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-950" />}>
+      <DashboardInner />
+    </Suspense>
+  );
+}
+
+function DashboardInner() {
+  const searchParams = useSearchParams();
+  const brand = searchParams.get("brand") || "Acme Fintech";
+  const data = generateData(brand);
   const [activeTab, setActiveTab] = useState<Tab>("overview");
 
   return (
     <div className="min-h-screen bg-gray-950">
-      <DashboardNav />
+      <DashboardNav brand={brand} />
       <div className="mx-auto max-w-7xl px-6 py-8">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-white">{BRAND}</h1>
+            <h1 className="text-2xl font-bold text-white">{brand}</h1>
             <p className="mt-1 text-sm text-gray-500">AI Visibility Dashboard</p>
           </div>
           <div className="flex items-center gap-3">
@@ -91,7 +150,7 @@ export default function Dashboard() {
               {tab === "facts" ? "Canonical Facts" : tab}
               {tab === "alerts" && (
                 <span className="ml-2 rounded-full bg-red-500/20 px-2 py-0.5 text-xs text-red-400">
-                  {alerts.filter((a) => a.severity === "high").length}
+                  {data.alerts.filter((a) => a.severity === "high").length}
                 </span>
               )}
             </button>
@@ -99,17 +158,26 @@ export default function Dashboard() {
         </div>
 
         <div className="mt-8">
-          {activeTab === "overview" && <OverviewTab />}
-          {activeTab === "engines" && <EnginesTab />}
-          {activeTab === "alerts" && <AlertsTab />}
-          {activeTab === "facts" && <FactsTab />}
+          {activeTab === "overview" && <OverviewTab data={data} />}
+          {activeTab === "engines" && <EnginesTab data={data} />}
+          {activeTab === "alerts" && <AlertsTab data={data} />}
+          {activeTab === "facts" && <FactsTab data={data} />}
+        </div>
+
+        <div className="mt-10 rounded-xl border border-cyan-500/20 bg-gradient-to-r from-cyan-950/40 via-gray-900/60 to-violet-950/40 p-8 text-center">
+          <h3 className="text-xl font-semibold text-white">Want the full picture for <span className="text-cyan-400">{brand}</span>?</h3>
+          <p className="mt-2 text-sm text-gray-400">Get real-time monitoring, detailed analytics, actionable alerts, and more.</p>
+          <button className="mt-5 rounded-lg bg-gradient-to-r from-cyan-500 to-violet-500 px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-cyan-500/20 transition hover:shadow-cyan-500/40 hover:scale-105">
+            Subscribe for Detail
+          </button>
         </div>
       </div>
     </div>
   );
 }
 
-function DashboardNav() {
+function DashboardNav({ brand }: { brand: string }) {
+  const initials = brand.split(/\s+/).map(w => w[0]).join("").slice(0, 2).toUpperCase();
   return (
     <nav className="border-b border-white/5 bg-gray-950/80 backdrop-blur-xl">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-6">
@@ -124,7 +192,7 @@ function DashboardNav() {
           <a href="/ge0xa/dashboard" className="text-sm text-cyan-400 font-medium">Dashboard</a>
           <a href="/ge0xa/" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">Home</a>
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-violet-500 text-xs font-bold text-white">
-            AF
+            {initials}
           </div>
         </div>
       </div>
@@ -132,7 +200,10 @@ function DashboardNav() {
   );
 }
 
-function OverviewTab() {
+type DashData = ReturnType<typeof generateData>;
+
+function OverviewTab({ data }: { data: DashData }) {
+  const { summaryCards, engines, alerts, soaTrend, topQueries } = data;
   return (
     <div className="space-y-8">
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -157,7 +228,7 @@ function OverviewTab() {
           <h3 className="text-sm font-mono uppercase tracking-widest text-gray-400">Share of Answer Trend</h3>
           <p className="mt-1 text-xs text-gray-600">You vs top competitor — last 6 weeks</p>
           <div className="mt-6">
-            <SoAChart />
+            <SoAChart soaTrend={soaTrend} />
           </div>
         </div>
 
@@ -225,7 +296,8 @@ function OverviewTab() {
   );
 }
 
-function EnginesTab() {
+function EnginesTab({ data }: { data: DashData }) {
+  const { engines } = data;
   return (
     <div className="space-y-6">
       {engines.map((engine) => (
@@ -265,7 +337,8 @@ function EnginesTab() {
   );
 }
 
-function AlertsTab() {
+function AlertsTab({ data }: { data: DashData }) {
+  const { alerts } = data;
   return (
     <div className="space-y-3">
       <div className="flex items-center gap-4 mb-6">
@@ -308,7 +381,8 @@ function AlertsTab() {
   );
 }
 
-function FactsTab() {
+function FactsTab({ data }: { data: DashData }) {
+  const { canonicalFacts } = data;
   return (
     <div className="space-y-6">
       <div className="rounded-xl border border-white/5 bg-gray-900/50 p-6">
@@ -366,7 +440,7 @@ function FactsTab() {
   );
 }
 
-function SoAChart() {
+function SoAChart({ soaTrend }: { soaTrend: { week: string; you: number; competitor: number }[] }) {
   const max = 60;
   return (
     <div className="space-y-3">
