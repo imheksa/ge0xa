@@ -96,26 +96,79 @@ export function generateData(brand: string) {
 
 export type BrandData = ReturnType<typeof generateData>;
 
+export type BrandProfile = {
+  name: string;
+  website: string;
+  blog: string;
+  twitter: string;
+  instagram: string;
+  linkedin: string;
+  createdAt: string;
+};
+
 const BRANDS_KEY = "hexagent_brands";
 
 export function getSavedBrands(): string[] {
+  return getBrandProfiles().map((b) => b.name);
+}
+
+export function getBrandProfiles(): BrandProfile[] {
   if (typeof window === "undefined") return [];
   try {
-    return JSON.parse(localStorage.getItem(BRANDS_KEY) || "[]");
+    const raw = localStorage.getItem(BRANDS_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed) && parsed.length > 0 && typeof parsed[0] === "string") {
+      const migrated: BrandProfile[] = parsed.map((name: string) => ({
+        name,
+        website: "",
+        blog: "",
+        twitter: "",
+        instagram: "",
+        linkedin: "",
+        createdAt: new Date().toISOString(),
+      }));
+      localStorage.setItem(BRANDS_KEY, JSON.stringify(migrated));
+      return migrated;
+    }
+    return parsed as BrandProfile[];
   } catch {
     return [];
   }
 }
 
+export function saveBrandProfile(profile: BrandProfile) {
+  const profiles = getBrandProfiles();
+  const existing = profiles.findIndex((p) => p.name === profile.name);
+  if (existing >= 0) {
+    profiles[existing] = profile;
+  } else {
+    profiles.push(profile);
+  }
+  localStorage.setItem(BRANDS_KEY, JSON.stringify(profiles));
+}
+
 export function saveBrand(brand: string) {
-  const brands = getSavedBrands();
-  if (!brands.includes(brand)) {
-    brands.push(brand);
-    localStorage.setItem(BRANDS_KEY, JSON.stringify(brands));
+  const profiles = getBrandProfiles();
+  if (!profiles.some((p) => p.name === brand)) {
+    profiles.push({
+      name: brand,
+      website: "",
+      blog: "",
+      twitter: "",
+      instagram: "",
+      linkedin: "",
+      createdAt: new Date().toISOString(),
+    });
+    localStorage.setItem(BRANDS_KEY, JSON.stringify(profiles));
   }
 }
 
 export function removeBrand(brand: string) {
-  const brands = getSavedBrands().filter((b) => b !== brand);
-  localStorage.setItem(BRANDS_KEY, JSON.stringify(brands));
+  const profiles = getBrandProfiles().filter((p) => p.name !== brand);
+  localStorage.setItem(BRANDS_KEY, JSON.stringify(profiles));
+}
+
+export function getBrandProfile(name: string): BrandProfile | undefined {
+  return getBrandProfiles().find((p) => p.name === name);
 }
