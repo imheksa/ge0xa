@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useI18n } from "@/i18n/context";
+import { useAuth } from "@/lib/auth-context";
 
 function HexIcon({ className = "w-5 h-5" }: { className?: string }) {
   return (
@@ -13,6 +14,7 @@ function HexIcon({ className = "w-5 h-5" }: { className?: string }) {
 
 function Navbar() {
   const { t, locale, toggleLocale } = useI18n();
+  const { user, loading } = useAuth();
   return (
     <nav className="fixed top-0 z-50 w-full border-b border-white/5 bg-gray-950/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
@@ -33,18 +35,30 @@ function Navbar() {
           <a href="#contact" className="text-sm text-gray-400 hover:text-cyan-400 transition-colors">
             {t.nav.contact}
           </a>
-<button
+          <button
             onClick={toggleLocale}
             className="rounded-md border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-mono font-medium text-cyan-400 hover:bg-white/10 transition-colors"
           >
             {locale === "en" ? "ID" : "EN"}
           </button>
-          <a
-            href="#contact"
-            className="rounded-lg bg-gradient-to-r from-cyan-500 to-violet-500 px-4 py-2 text-sm font-medium text-white hover:from-cyan-400 hover:to-violet-400 transition-all"
-          >
-            {t.nav.getAudit}
-          </a>
+          {!loading && user ? (
+            <a
+              href="/ge0xa/dashboard"
+              className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-cyan-500 to-violet-500 px-4 py-2 text-sm font-medium text-white hover:from-cyan-400 hover:to-violet-400 transition-all"
+            >
+              {user.photoURL ? (
+                <img src={user.photoURL} alt="" className="h-5 w-5 rounded-full" referrerPolicy="no-referrer" />
+              ) : null}
+              Dashboard
+            </a>
+          ) : (
+            <a
+              href="/ge0xa/login"
+              className="rounded-lg bg-gradient-to-r from-cyan-500 to-violet-500 px-4 py-2 text-sm font-medium text-white hover:from-cyan-400 hover:to-violet-400 transition-all"
+            >
+              Sign In
+            </a>
+          )}
         </div>
         <button
           onClick={toggleLocale}

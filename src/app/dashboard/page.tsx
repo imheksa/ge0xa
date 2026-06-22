@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
+import { useAuth } from "@/lib/auth-context";
 
 function hash(str: string): number {
   let h = 0;
@@ -111,14 +112,31 @@ export default function Dashboard() {
 }
 
 function DashboardInner() {
+  const { user, loading, signOut } = useAuth();
   const searchParams = useSearchParams();
   const brand = searchParams.get("brand") || "Acme Fintech";
   const data = generateData(brand);
   const [activeTab, setActiveTab] = useState<Tab>("overview");
 
+  useEffect(() => {
+    if (!loading && !user) {
+      window.location.href = "/ge0xa/login";
+    }
+  }, [user, loading]);
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gray-950">
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-cyan-500 border-t-transparent" />
+      </div>
+    );
+  }
+
+  if (!user) return null;
+
   return (
     <div className="min-h-screen bg-gray-950">
-      <DashboardNav brand={brand} />
+      <DashboardNav brand={brand} user={user} signOut={signOut} />
       <div className="mx-auto max-w-7xl px-6 py-8">
         <div className="flex items-center justify-between">
           <div>
@@ -176,8 +194,8 @@ function DashboardInner() {
   );
 }
 
-function DashboardNav({ brand }: { brand: string }) {
-  const initials = brand.split(/\s+/).map(w => w[0]).join("").slice(0, 2).toUpperCase();
+function DashboardNav({ brand, user, signOut }: { brand: string; user: { displayName: string | null; photoURL: string | null; email: string | null }; signOut: () => Promise<void> }) {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <nav className="border-b border-white/5 bg-gray-950/80 backdrop-blur-xl">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-6">
@@ -191,8 +209,33 @@ function DashboardNav({ brand }: { brand: string }) {
         <div className="flex items-center gap-6">
           <a href="/ge0xa/dashboard" className="text-sm text-cyan-400 font-medium">Dashboard</a>
           <a href="/ge0xa/" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">Home</a>
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-violet-500 text-xs font-bold text-white">
-            {initials}
+          <div className="relative">
+            <button onClick={() => setMenuOpen(!menuOpen)} className="flex items-center gap-2">
+              {user.photoURL ? (
+                <img src={user.photoURL} alt="" className="h-8 w-8 rounded-full border border-white/10" referrerPolicy="no-referrer" />
+              ) : (
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-violet-500 text-xs font-bold text-white">
+                  {(user.displayName || user.email || "U")[0].toUpperCase()}
+                </div>
+              )}
+            </button>
+            {menuOpen && (
+              <div className="absolute right-0 top-full mt-2 w-56 rounded-xl border border-white/10 bg-gray-900 p-2 shadow-xl z-50">
+                <div className="px-3 py-2 border-b border-white/5">
+                  <p className="text-sm font-medium text-white truncate">{user.displayName}</p>
+                  <p className="text-xs text-gray-500 truncate">{user.email}</p>
+                </div>
+                <button
+                  onClick={async () => { await signOut(); window.location.href = "/ge0xa/"; }}
+                  className="mt-1 flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-gray-400 hover:bg-white/5 hover:text-white transition-colors"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-4 w-4">
+                    <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" />
+                  </svg>
+                  Sign out
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
