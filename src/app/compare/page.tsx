@@ -164,7 +164,7 @@ function CompareInner() {
             {/* SoA Trend */}
             <div className="rounded-xl border border-white/5 bg-gray-900/50 p-6">
               <h3 className="text-sm font-mono uppercase tracking-widest text-gray-400">Share of Answer Trend</h3>
-              <p className="mt-1 text-xs text-gray-600">6-week SoA comparison</p>
+              <p className="mt-1 text-xs text-gray-400">6-week SoA comparison</p>
               <div className="mt-6 space-y-3">
                 {dataA.soaTrend.map((weekA, i) => {
                   const weekB = dataB.soaTrend[i];
@@ -216,7 +216,7 @@ function CompareInner() {
         {!bothReady && (myBrands.length === 0 || competitors.length === 0) && (
           <div className="mt-16 text-center">
             <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-2xl border border-white/5 bg-gray-900/50">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-10 w-10 text-gray-600">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-10 w-10 text-gray-400">
                 <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4-4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
               </svg>
             </div>
@@ -279,7 +279,7 @@ function BrandSelector({ label, value, onChange, options, color, emptyLabel, add
         </div>
       ) : (
         <div className="mt-3">
-          <p className="text-sm text-gray-600">{emptyLabel}</p>
+          <p className="text-sm text-gray-400">{emptyLabel}</p>
           <a href={addLink} className={`mt-2 inline-block text-sm font-medium ${labelColor} hover:underline`}>
             {addLabel}
           </a>
@@ -324,7 +324,7 @@ function WinnerSummary({ brandA, brandB, dataA, dataB }: {
             <p className="text-2xl font-bold text-cyan-400">{winsA}</p>
             <p className="text-xs text-gray-500">{brandA}</p>
           </div>
-          <span className="text-gray-600 text-sm">vs</span>
+          <span className="text-gray-400 text-sm">vs</span>
           <div className="text-center">
             <p className="text-2xl font-bold text-orange-400">{winsB}</p>
             <p className="text-xs text-gray-500">{brandB}</p>
@@ -338,7 +338,7 @@ function WinnerSummary({ brandA, brandB, dataA, dataB }: {
           }`} title={`${m.label}: ${m.a} vs ${m.b}`} />
         ))}
       </div>
-      <div className="mt-2 flex justify-between text-[10px] text-gray-600">
+      <div className="mt-2 flex justify-between text-[10px] text-gray-400">
         {metrics.map((m) => (
           <span key={m.label}>{m.label}</span>
         ))}
@@ -363,13 +363,13 @@ function CompareMetric({ label, valueA, valueB, unit, brandA, brandB }: {
       <p className="text-xs font-mono uppercase tracking-widest text-gray-500">{label}</p>
       <div className="mt-4 flex items-end justify-between">
         <div>
-          <p className="text-xs text-gray-600 truncate max-w-[80px]">{brandA}</p>
+          <p className="text-xs text-gray-400 truncate max-w-[80px]">{brandA}</p>
           <p className={`text-2xl font-bold ${winner === "A" ? "text-cyan-400" : "text-gray-400"}`}>
             {valueA}<span className="text-xs text-gray-500">{unit}</span>
           </p>
         </div>
         <div className="flex flex-col items-center px-2">
-          <span className="text-xs text-gray-600">vs</span>
+          <span className="text-xs text-gray-400">vs</span>
           {winner !== "tie" && (
             <span className={`mt-1 rounded-full px-1.5 py-0.5 text-[10px] font-mono ${
               winner === "A" ? "bg-cyan-500/10 text-cyan-400" : "bg-orange-500/10 text-orange-400"
@@ -379,7 +379,7 @@ function CompareMetric({ label, valueA, valueB, unit, brandA, brandB }: {
           )}
         </div>
         <div className="text-right">
-          <p className="text-xs text-gray-600 truncate max-w-[80px]">{brandB}</p>
+          <p className="text-xs text-gray-400 truncate max-w-[80px]">{brandB}</p>
           <p className={`text-2xl font-bold ${winner === "B" ? "text-orange-400" : "text-gray-400"}`}>
             {valueB}<span className="text-xs text-gray-500">{unit}</span>
           </p>

@@ -433,7 +433,7 @@ function Footer() {
             </ul>
           </div>
         </div>
-        <div className="mt-12 border-t border-white/5 pt-6 text-center font-mono text-xs text-gray-600">
+        <div className="mt-12 border-t border-white/5 pt-6 text-center font-mono text-xs text-gray-400">
           &copy; {new Date().getFullYear()} Hexagent. {t.footer.rights}
         </div>
       </div>
@@ -684,7 +684,7 @@ function ScanStep({ label, done }: { label: string; done: boolean }) {
       ) : (
         <span className="h-3 w-3 rounded-full border border-gray-600 animate-pulse" />
       )}
-      <span className={`text-xs font-mono ${done ? "text-gray-400" : "text-gray-600"}`}>{label}</span>
+      <span className={`text-xs font-mono ${done ? "text-gray-400" : "text-gray-400"}`}>{label}</span>
     </div>
   );
 }
