@@ -172,3 +172,64 @@ export function removeBrand(brand: string) {
 export function getBrandProfile(name: string): BrandProfile | undefined {
   return getBrandProfiles().find((p) => p.name === name);
 }
+
+// Competitor Brands
+
+export type SubscriptionTier = "free" | "tier1" | "tier2" | "tier3";
+
+export const TIER_LIMITS: Record<SubscriptionTier, number> = {
+  free: 1,
+  tier1: 3,
+  tier2: 5,
+  tier3: 10,
+};
+
+export const TIER_LABELS: Record<SubscriptionTier, string> = {
+  free: "Free",
+  tier1: "Starter",
+  tier2: "Pro",
+  tier3: "Enterprise",
+};
+
+const COMPETITORS_KEY = "hexagent_competitors";
+const TIER_KEY = "hexagent_tier";
+
+export function getUserTier(): SubscriptionTier {
+  if (typeof window === "undefined") return "free";
+  return (localStorage.getItem(TIER_KEY) as SubscriptionTier) || "free";
+}
+
+export function setUserTier(tier: SubscriptionTier) {
+  localStorage.setItem(TIER_KEY, tier);
+}
+
+export function getCompetitorProfiles(): BrandProfile[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = localStorage.getItem(COMPETITORS_KEY);
+    if (!raw) return [];
+    return JSON.parse(raw) as BrandProfile[];
+  } catch {
+    return [];
+  }
+}
+
+export function getCompetitorNames(): string[] {
+  return getCompetitorProfiles().map((b) => b.name);
+}
+
+export function saveCompetitorProfile(profile: BrandProfile) {
+  const profiles = getCompetitorProfiles();
+  const existing = profiles.findIndex((p) => p.name === profile.name);
+  if (existing >= 0) {
+    profiles[existing] = profile;
+  } else {
+    profiles.push(profile);
+  }
+  localStorage.setItem(COMPETITORS_KEY, JSON.stringify(profiles));
+}
+
+export function removeCompetitor(name: string) {
+  const profiles = getCompetitorProfiles().filter((p) => p.name !== name);
+  localStorage.setItem(COMPETITORS_KEY, JSON.stringify(profiles));
+}
