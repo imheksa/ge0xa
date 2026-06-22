@@ -217,7 +217,7 @@ export default function BrandsPage() {
                 className={`rounded-lg px-5 py-2 text-sm font-medium transition-all ${
                   canAddComp
                     ? "bg-gradient-to-r from-orange-500 to-red-500 text-white hover:from-orange-400 hover:to-red-400"
-                    : "bg-gray-800 text-gray-600 cursor-not-allowed"
+                    : "bg-gray-800 text-gray-400 cursor-not-allowed"
                 }`}
               >
                 + Add Competitor
@@ -338,7 +338,7 @@ function EmptyState({ icon, title, description, buttonLabel, onClick, accent = "
   return (
     <div className="mt-12 text-center">
       <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-2xl border border-white/5 bg-gray-900/50">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-10 w-10 text-gray-600">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-10 w-10 text-gray-400">
           {icon}
         </svg>
       </div>
@@ -387,7 +387,7 @@ function BrandCard({ profile, deleteConfirm, onEdit, onDelete, onDeleteConfirm, 
             )}
           </div>
           <div className="flex items-center gap-1 ml-2 opacity-0 group-hover:opacity-100 transition-opacity">
-            <button onClick={onEdit} className="rounded-md p-1.5 text-gray-600 hover:bg-white/5 hover:text-cyan-400 transition-colors" title="Edit">
+            <button onClick={onEdit} className="rounded-md p-1.5 text-gray-400 hover:bg-white/5 hover:text-cyan-400 transition-colors" title="Edit">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-4 w-4">
                 <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
                 <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
@@ -399,7 +399,7 @@ function BrandCard({ profile, deleteConfirm, onEdit, onDelete, onDeleteConfirm, 
                 <button onClick={onDeleteCancel} className="rounded-md bg-white/5 px-2 py-1 text-xs text-gray-400 hover:bg-white/10">Cancel</button>
               </div>
             ) : (
-              <button onClick={onDelete} className="rounded-md p-1.5 text-gray-600 hover:bg-white/5 hover:text-red-400 transition-colors" title="Delete">
+              <button onClick={onDelete} className="rounded-md p-1.5 text-gray-400 hover:bg-white/5 hover:text-red-400 transition-colors" title="Delete">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-4 w-4">
                   <path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14" />
                 </svg>
@@ -644,7 +644,7 @@ function FormField({ label, value, onChange, placeholder, required, disabled, ic
       <div className="relative">
         {icon && (
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-4 w-4 text-gray-600">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-4 w-4 text-gray-400">
               {icon}
             </svg>
           </div>
@@ -656,7 +656,7 @@ function FormField({ label, value, onChange, placeholder, required, disabled, ic
           placeholder={placeholder}
           required={required}
           disabled={disabled}
-          className={`w-full rounded-lg border border-white/10 bg-gray-950/50 py-2.5 text-sm text-white placeholder-gray-600 outline-none focus:border-cyan-500/50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${icon ? "pl-10 pr-4" : "px-4"}`}
+          className={`w-full rounded-lg border border-white/10 bg-gray-950/50 py-2.5 text-sm text-white placeholder-gray-500 outline-none focus:border-cyan-500/50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${icon ? "pl-10 pr-4" : "px-4"}`}
         />
       </div>
     </div>
