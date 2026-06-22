@@ -33,10 +33,7 @@ function Navbar() {
           <a href="#contact" className="text-sm text-gray-400 hover:text-cyan-400 transition-colors">
             {t.nav.contact}
           </a>
-          <a href="/ge0xa/dashboard" className="text-sm text-cyan-400 hover:text-cyan-300 transition-colors font-mono">
-            Demo
-          </a>
-          <button
+<button
             onClick={toggleLocale}
             className="rounded-md border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-mono font-medium text-cyan-400 hover:bg-white/10 transition-colors"
           >
