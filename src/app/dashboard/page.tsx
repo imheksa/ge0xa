@@ -209,7 +209,7 @@ function OverviewTab() {
         <div className="rounded-xl border border-white/5 bg-gray-900/50 p-6">
           <h3 className="text-sm font-mono uppercase tracking-widest text-gray-400">Top Monitored Queries</h3>
           <div className="mt-4 space-y-2">
-            {topQueries.map((q) => (
+            {topQueries.slice(0, 3).map((q) => (
               <div key={q.query} className="flex items-center justify-between rounded-lg border border-white/5 bg-gray-950/50 px-4 py-3">
                 <div className="min-w-0 flex-1">
                   <p className="text-sm text-white truncate">&quot;{q.query}&quot;</p>
