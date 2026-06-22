@@ -8,7 +8,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (user && !loading) {
-      window.location.href = "/ge0xa/dashboard";
+      window.location.href = "/ge0xa/brands";
     }
   }, [user, loading]);
 

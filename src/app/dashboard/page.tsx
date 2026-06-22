@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { useAuth } from "@/lib/auth-context";
-import { generateData, type BrandData } from "@/lib/brand-data";
+import { generateData, getSavedBrands, type BrandData } from "@/lib/brand-data";
 
 type Tab = "overview" | "engines" | "alerts" | "facts";
 
@@ -19,18 +19,38 @@ export default function Dashboard() {
 function DashboardInner() {
   const { user, loading, signOut } = useAuth();
   const searchParams = useSearchParams();
-  const brand = searchParams.get("brand") || "Acme Fintech";
-  const data = generateData(brand);
+  const brandParam = searchParams.get("brand");
+  const [brand, setBrand] = useState(brandParam || "");
   const [activeTab, setActiveTab] = useState<Tab>("overview");
   const isGuest = !user;
 
-  if (loading) {
+  useEffect(() => {
+    if (!loading && !brandParam) {
+      if (user) {
+        const brands = getSavedBrands();
+        if (brands.length > 0) {
+          setBrand(brands[0]);
+        } else {
+          window.location.href = "/ge0xa/brands";
+          return;
+        }
+      } else {
+        setBrand("Acme Fintech");
+      }
+    }
+  }, [loading, user, brandParam]);
+
+  const data = brand ? generateData(brand) : null;
+
+  if (loading || (!brand && !isGuest)) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-gray-950">
         <div className="h-8 w-8 animate-spin rounded-full border-2 border-cyan-500 border-t-transparent" />
       </div>
     );
   }
+
+  if (!data) return null;
 
   const availableTabs: Tab[] = isGuest ? ["overview"] : ["overview", "engines", "alerts", "facts"];
 
@@ -103,21 +123,6 @@ function DashboardInner() {
           {activeTab === "engines" && !isGuest && <EnginesTab data={data} />}
           {activeTab === "alerts" && !isGuest && <AlertsTab data={data} />}
           {activeTab === "facts" && !isGuest && <FactsTab data={data} />}
-        </div>
-
-        <div className="mt-10 rounded-xl border border-cyan-500/20 bg-gradient-to-r from-cyan-950/40 via-gray-900/60 to-violet-950/40 p-8 text-center">
-          <h3 className="text-xl font-semibold text-white">Want the full picture for <span className="text-cyan-400">{brand}</span>?</h3>
-          <p className="mt-2 text-sm text-gray-400">
-            {isGuest
-              ? "Sign in to unlock detailed engine analytics, real-time alerts, canonical facts, and more."
-              : "Get real-time monitoring, detailed analytics, actionable alerts, and more."}
-          </p>
-          <a
-            href="/ge0xa/login"
-            className="mt-5 inline-block rounded-lg bg-gradient-to-r from-cyan-500 to-violet-500 px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-cyan-500/20 transition hover:shadow-cyan-500/40 hover:scale-105"
-          >
-            {isGuest ? "Sign In for Full Access" : "Subscribe for Detail"}
-          </a>
         </div>
       </div>
     </div>
