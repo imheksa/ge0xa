@@ -653,6 +653,7 @@ function GradCapIcon() {
 }
 
 function QuickScan() {
+  const { t } = useI18n();
   const [brand, setBrand] = useState("");
   const [phase, setPhase] = useState<"idle" | "scanning">("idle");
   const [scanProgress, setScanProgress] = useState(0);
@@ -685,13 +686,13 @@ function QuickScan() {
       <div className="relative mx-auto max-w-5xl px-6">
         <div className="text-center">
           <span className="font-mono text-xs font-semibold uppercase tracking-widest text-cyan-400">
-            Quick Scan
+            {t.quickScan.label}
           </span>
           <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
-            How visible is your brand to AI?
+            {t.quickScan.title}
           </h2>
           <p className="mt-3 text-gray-400">
-            Enter your brand name and get an instant AI visibility snapshot.
+            {t.quickScan.subtitle}
           </p>
         </div>
 
@@ -703,14 +704,14 @@ function QuickScan() {
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && startScan()}
-                placeholder="Enter your brand name..."
+                placeholder={t.quickScan.placeholder}
                 className="flex-1 rounded-lg border border-white/10 bg-gray-900/80 px-5 py-3.5 text-white placeholder:text-gray-500 focus:border-cyan-500/50 focus:outline-none focus:ring-1 focus:ring-cyan-500/30 transition-all"
               />
               <button
                 onClick={startScan}
                 className="rounded-lg bg-gradient-to-r from-cyan-500 to-violet-500 px-6 py-3.5 text-sm font-semibold text-white hover:from-cyan-400 hover:to-violet-400 transition-all whitespace-nowrap"
               >
-                Scan Now
+                {t.quickScan.button}
               </button>
             </div>
           )}
@@ -719,11 +720,11 @@ function QuickScan() {
             <div className="rounded-xl border border-white/5 bg-gray-900/50 p-8 text-center">
               <div className="inline-flex items-center gap-3 rounded-full border border-cyan-500/20 bg-cyan-500/5 px-4 py-2 text-sm font-mono text-cyan-400">
                 <span className="h-2 w-2 rounded-full bg-cyan-400 animate-pulse" />
-                Scanning &ldquo;{brand}&rdquo; across AI engines...
+                {t.quickScan.scanning} &ldquo;{brand}&rdquo; {t.quickScan.scanSuffix}
               </div>
               <div className="mt-6 mx-auto max-w-sm">
                 <div className="flex justify-between mb-2">
-                  <span className="text-xs font-mono text-gray-500">Progress</span>
+                  <span className="text-xs font-mono text-gray-500">{t.quickScan.progress}</span>
                   <span className="text-xs font-mono text-cyan-400">{scanProgress}%</span>
                 </div>
                 <div className="h-2 rounded-full bg-gray-800 overflow-hidden">
@@ -733,10 +734,10 @@ function QuickScan() {
                   />
                 </div>
                 <div className="mt-4 space-y-1.5 text-left">
-                  <ScanStep label="Querying ChatGPT..." done={scanProgress > 25} />
-                  <ScanStep label="Querying Perplexity..." done={scanProgress > 45} />
-                  <ScanStep label="Querying Gemini..." done={scanProgress > 65} />
-                  <ScanStep label="Analyzing AI Overviews..." done={scanProgress > 85} />
+                  <ScanStep label={t.quickScan.step1} done={scanProgress > 25} />
+                  <ScanStep label={t.quickScan.step2} done={scanProgress > 45} />
+                  <ScanStep label={t.quickScan.step3} done={scanProgress > 65} />
+                  <ScanStep label={t.quickScan.step4} done={scanProgress > 85} />
                 </div>
               </div>
             </div>
