@@ -75,47 +75,116 @@ function Hero() {
   const { t } = useI18n();
   const { user } = useAuth();
   return (
-    <section className="relative overflow-hidden bg-gray-950 pt-32 pb-24">
+    <section className="relative overflow-hidden bg-gray-950 pt-28 pb-20 lg:pt-36 lg:pb-28">
       <div className="absolute inset-0 bg-grid animate-grid-fade" />
       <div className="absolute top-20 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[128px]" />
       <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-violet-500/10 rounded-full blur-[128px]" />
 
-      <div className="relative mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 text-center">
-        <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/5 px-4 py-1.5 text-sm font-mono text-cyan-400">
-          <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse-glow" />
-          {t.hero.tagline}
-        </div>
-        <h1 className="mx-auto max-w-5xl text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-          {t.hero.title}
-          <span className="text-gradient">{t.hero.titleHighlight}</span>
-        </h1>
-        <p className="mx-auto mt-6 max-w-3xl text-lg text-gray-400 leading-relaxed">
-          {t.hero.subtitle}
-        </p>
-        <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-          <a
-            href={user ? "/ge0xa/brands" : "/ge0xa/login"}
-            className="group relative rounded-lg bg-gradient-to-r from-cyan-500 to-violet-500 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all"
-          >
-            {user ? t.hero.ctaLoggedIn : t.hero.cta}
-          </a>
-          <a
-            href="#solution"
-            className="rounded-lg border border-white/10 bg-white/5 px-8 py-3.5 text-base font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-all"
-          >
-            {t.hero.ctaSecondary}
-          </a>
-        </div>
-        <div className="mt-16 flex flex-wrap items-center justify-center gap-4 text-sm">
-          <span className="font-mono text-gray-500 uppercase tracking-wider text-xs">Monitors:</span>
-          {["ChatGPT", "Perplexity", "Gemini", "AI Overviews"].map((e) => (
-            <span
-              key={e}
-              className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 font-mono text-xs text-gray-400"
-            >
-              {e}
-            </span>
-          ))}
+      <div className="relative mx-auto px-6 sm:px-10 lg:px-16 xl:px-24">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left: Text */}
+          <div>
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/5 px-4 py-1.5 text-sm font-mono text-cyan-400">
+              <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse-glow" />
+              {t.hero.tagline}
+            </div>
+            <h1 className="text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl">
+              {t.hero.title}
+              <span className="text-gradient">{t.hero.titleHighlight}</span>
+            </h1>
+            <p className="mt-6 max-w-xl text-lg text-gray-400 leading-relaxed lg:text-xl">
+              {t.hero.subtitle}
+            </p>
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+              <a
+                href={user ? "/ge0xa/brands" : "/ge0xa/login"}
+                className="rounded-lg bg-gradient-to-r from-cyan-500 to-violet-500 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-105 transition-all"
+              >
+                {user ? t.hero.ctaLoggedIn : t.hero.cta}
+              </a>
+              <a
+                href="#solution"
+                className="rounded-lg border border-white/10 bg-white/5 px-8 py-4 text-base font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-all"
+              >
+                {t.hero.ctaSecondary}
+              </a>
+            </div>
+            <div className="mt-10 flex flex-wrap items-center gap-3 text-sm">
+              <span className="font-mono text-gray-500 uppercase tracking-wider text-xs">Monitors:</span>
+              {["ChatGPT", "Perplexity", "Gemini", "AI Overviews"].map((e) => (
+                <span
+                  key={e}
+                  className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 font-mono text-xs text-gray-400"
+                >
+                  {e}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Right: Visual */}
+          <div className="relative hidden lg:flex items-center justify-center">
+            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-violet-500/10 rounded-3xl blur-3xl" />
+            <div className="relative w-full max-w-lg">
+              {/* Animated dashboard mockup */}
+              <div className="rounded-2xl border border-white/10 bg-gray-900/80 p-6 backdrop-blur-xl shadow-2xl">
+                <div className="flex items-center gap-2 mb-5">
+                  <span className="h-3 w-3 rounded-full bg-red-500/60" />
+                  <span className="h-3 w-3 rounded-full bg-amber-500/60" />
+                  <span className="h-3 w-3 rounded-full bg-emerald-500/60" />
+                  <span className="ml-3 text-xs font-mono text-gray-500">AI Visibility Dashboard</span>
+                </div>
+                {/* Score cards */}
+                <div className="grid grid-cols-2 gap-3 mb-4">
+                  <div className="rounded-xl border border-white/5 bg-gray-950/60 p-4 animate-float" style={{ animationDelay: "0s" }}>
+                    <p className="text-[10px] font-mono uppercase tracking-widest text-gray-500">Brand Score</p>
+                    <p className="mt-1 text-2xl font-bold text-cyan-400">78<span className="text-xs text-gray-500">/100</span></p>
+                    <span className="text-[10px] font-mono text-emerald-400">+5 this week</span>
+                  </div>
+                  <div className="rounded-xl border border-white/5 bg-gray-950/60 p-4 animate-float" style={{ animationDelay: "1s" }}>
+                    <p className="text-[10px] font-mono uppercase tracking-widest text-gray-500">Share of Answer</p>
+                    <p className="mt-1 text-2xl font-bold text-violet-400">42<span className="text-xs text-gray-500">%</span></p>
+                    <span className="text-[10px] font-mono text-emerald-400">+8 this week</span>
+                  </div>
+                </div>
+                {/* Engine status */}
+                <div className="space-y-2">
+                  {[
+                    { name: "ChatGPT", status: true, icon: "G" },
+                    { name: "Perplexity", status: true, icon: "P" },
+                    { name: "Gemini", status: true, icon: "Gm" },
+                    { name: "AI Overviews", status: false, icon: "AO" },
+                  ].map((engine) => (
+                    <div key={engine.name} className="flex items-center justify-between rounded-lg border border-white/5 bg-gray-950/40 px-3 py-2">
+                      <div className="flex items-center gap-2">
+                        <span className="flex h-6 w-6 items-center justify-center rounded-md bg-white/5 font-mono text-[10px] text-gray-400">{engine.icon}</span>
+                        <span className="text-xs text-white">{engine.name}</span>
+                      </div>
+                      <span className={`rounded-full px-2 py-0.5 text-[10px] font-mono ${
+                        engine.status ? "bg-emerald-500/10 text-emerald-400" : "bg-red-500/10 text-red-400"
+                      }`}>
+                        {engine.status ? "Found" : "Missing"}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              {/* Floating alert card */}
+              <div className="absolute -bottom-4 -left-8 rounded-xl border border-red-500/20 bg-gray-900/90 p-3 shadow-xl backdrop-blur-sm animate-float" style={{ animationDelay: "2s" }}>
+                <div className="flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-red-400 animate-pulse" />
+                  <span className="text-[10px] font-mono text-red-400">Alert: Incorrect pricing on ChatGPT</span>
+                </div>
+              </div>
+              {/* Floating accuracy card */}
+              <div className="absolute -top-4 -right-6 rounded-xl border border-emerald-500/20 bg-gray-900/90 p-3 shadow-xl backdrop-blur-sm animate-float" style={{ animationDelay: "3s" }}>
+                <div className="flex items-center gap-2">
+                  <span className="text-emerald-400 text-sm">✓</span>
+                  <span className="text-[10px] font-mono text-emerald-400">Accuracy: 92%</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -137,7 +206,7 @@ function Problem() {
           <span className="font-mono text-xs font-semibold uppercase tracking-widest text-red-400">
             {t.problem.label}
           </span>
-          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
             {t.problem.title}
           </h2>
         </div>
@@ -181,7 +250,7 @@ function Solution() {
           <span className="font-mono text-xs font-semibold uppercase tracking-widest text-cyan-400">
             {t.solution.label}
           </span>
-          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
             {t.solution.title}
           </h2>
         </div>
@@ -216,7 +285,7 @@ function Metrics() {
     <section className="relative border-y border-white/5 bg-gray-900/50 py-20">
       <div className="absolute inset-0 bg-grid opacity-50" />
       <div className="relative mx-auto px-6 sm:px-10 lg:px-16 xl:px-24">
-        <h2 className="text-center text-2xl font-bold text-white sm:text-3xl">
+        <h2 className="text-center text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
           {t.metrics.title}
         </h2>
         <div className="mt-12 grid gap-8 md:grid-cols-3">
@@ -250,7 +319,7 @@ function Features() {
           <span className="font-mono text-xs font-semibold uppercase tracking-widest text-cyan-400">
             {t.features.label}
           </span>
-          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
             {t.features.title}
           </h2>
         </div>
@@ -290,7 +359,7 @@ function Pricing() {
           <span className="font-mono text-xs font-semibold uppercase tracking-widest text-cyan-400">
             {t.pricing.label}
           </span>
-          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
             {t.pricing.title}
           </h2>
           <p className="mt-3 text-gray-400">{t.pricing.subtitle}</p>
@@ -361,7 +430,7 @@ function Industries() {
           <span className="font-mono text-xs font-semibold uppercase tracking-widest text-cyan-400">
             {t.industries.label}
           </span>
-          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
             {t.industries.title}
           </h2>
         </div>
@@ -392,7 +461,7 @@ function CTA() {
       <div className="absolute top-0 left-1/3 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[200px]" />
       <div className="absolute bottom-0 right-1/3 w-[600px] h-[600px] bg-violet-500/10 rounded-full blur-[200px]" />
       <div className="relative mx-auto max-w-4xl px-6 text-center">
-        <h2 className="text-3xl font-bold text-white sm:text-4xl">{user ? t.cta.titleLoggedIn : t.cta.title}</h2>
+        <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">{user ? t.cta.titleLoggedIn : t.cta.title}</h2>
         <p className="mt-4 text-lg text-gray-400 leading-relaxed">{user ? t.cta.subtitleLoggedIn : t.cta.subtitle}</p>
         <a
           href={user ? "/ge0xa/brands" : "/ge0xa/login"}
@@ -618,7 +687,7 @@ function QuickScan() {
           <span className="font-mono text-xs font-semibold uppercase tracking-widest text-cyan-400">
             Quick Scan
           </span>
-          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
             How visible is your brand to AI?
           </h2>
           <p className="mt-3 text-gray-400">

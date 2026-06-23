@@ -88,7 +88,7 @@ export default function BrandsPage() {
   return (
     <div className="min-h-screen bg-gray-950">
       <nav className="border-b border-white/5 bg-gray-950/80 backdrop-blur-xl">
-        <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-6">
+        <div className="mx-auto flex h-14 items-center justify-between px-6 sm:px-10 lg:px-16 xl:px-24">
           <a href="/ge0xa/" className="flex items-center gap-2 text-lg font-bold tracking-tight">
             <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5 text-cyan-400">
               <path d="M12 2L21.5 7.5V16.5L12 22L2.5 16.5V7.5L12 2Z" stroke="currentColor" strokeWidth="1.5" />
@@ -116,10 +116,10 @@ export default function BrandsPage() {
         </div>
       </nav>
 
-      <div className="mx-auto max-w-7xl px-6 py-8">
+      <div className="mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 py-8">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-white">My Brands</h1>
+            <h1 className="text-3xl font-bold text-white lg:text-4xl">My Brands</h1>
             <p className="mt-1 text-sm text-gray-500">Track your brands and competitors across AI engines</p>
           </div>
           <a
