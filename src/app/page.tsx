@@ -367,42 +367,43 @@ function Pricing() {
           <p className="mt-3 text-gray-400">{t.pricing.subtitle}</p>
         </div>
         <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {plans.map((plan) => (
+          {plans.map((plan, idx) => (
             <div
               key={plan.name}
-              className={`relative rounded-xl p-8 backdrop-blur-sm transition-all ${
+              className={`group relative flex flex-col rounded-xl p-8 backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl animate-fade-in-up ${
                 plan.popular
-                  ? "border border-cyan-500/30 bg-gradient-to-b from-cyan-500/10 to-violet-500/10 shadow-lg shadow-cyan-500/10"
-                  : "border border-white/5 bg-gray-900/50 hover:border-white/10"
+                  ? "border border-cyan-500/30 bg-gradient-to-b from-cyan-500/10 to-violet-500/10 shadow-lg shadow-cyan-500/10 hover:shadow-cyan-500/20"
+                  : "border border-white/5 bg-gray-900/50 hover:border-white/10 hover:shadow-white/5"
               }`}
+              style={{ animationDelay: `${idx * 150}ms` }}
             >
               {plan.popular && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-cyan-500 to-violet-500 px-4 py-1 text-xs font-semibold text-white">
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-cyan-500 to-violet-500 px-4 py-1 text-xs font-semibold text-white animate-pulse-glow">
                   Popular
                 </span>
               )}
               <h3 className="text-lg font-semibold text-white">{plan.name}</h3>
               <p className="mt-1 text-sm text-gray-500">{plan.desc}</p>
               <div className="mt-6">
-                <span className="text-2xl font-bold text-white">{plan.price}</span>
+                <span className="text-3xl font-bold text-white transition-colors group-hover:text-cyan-400">{plan.price}</span>
                 {"period" in plan && (
                   <span className="text-sm text-gray-500">{plan.period}</span>
                 )}
               </div>
-              <ul className="mt-6 space-y-3">
+              <ul className="mt-6 flex-1 space-y-3">
                 {plan.features.map((f) => (
                   <li key={f} className="flex items-start gap-2 text-sm text-gray-400">
-                    <span className="mt-0.5 text-cyan-400">&#10003;</span>
+                    <span className="mt-0.5 text-cyan-400 transition-transform group-hover:scale-110">&#10003;</span>
                     {f}
                   </li>
                 ))}
               </ul>
               <a
                 href={user ? "/ge0xa/brands" : "/ge0xa/login"}
-                className={`mt-8 block rounded-lg py-2.5 text-center text-sm font-semibold transition-all ${
+                className={`mt-8 block rounded-lg py-3 text-center text-sm font-semibold transition-all duration-300 hover:scale-105 ${
                   plan.popular
-                    ? "bg-gradient-to-r from-cyan-500 to-violet-500 text-white hover:from-cyan-400 hover:to-violet-400"
-                    : "border border-white/10 text-gray-300 hover:bg-white/5 hover:text-white"
+                    ? "bg-gradient-to-r from-cyan-500 to-violet-500 text-white shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:from-cyan-400 hover:to-violet-400"
+                    : "border border-white/10 text-gray-300 hover:bg-white/10 hover:text-white hover:border-white/20"
                 }`}
               >
                 {plan.cta}
