@@ -111,7 +111,7 @@ function Hero() {
             </div>
             <div className="mt-10 flex flex-wrap items-center gap-3 text-sm">
               <span className="font-mono text-gray-500 uppercase tracking-wider text-xs">Monitors:</span>
-              {["ChatGPT", "Perplexity", "Gemini", "AI Overviews"].map((e) => (
+              {["ChatGPT", "Gemini", "Claude", "Grok", "Deepseek", "Google AI"].map((e) => (
                 <span
                   key={e}
                   className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 font-mono text-xs text-gray-400"
@@ -151,9 +151,11 @@ function Hero() {
                 <div className="space-y-2">
                   {[
                     { name: "ChatGPT", status: true, icon: "G" },
-                    { name: "Perplexity", status: true, icon: "P" },
                     { name: "Gemini", status: true, icon: "Gm" },
-                    { name: "AI Overviews", status: false, icon: "AO" },
+                    { name: "Claude", status: true, icon: "C" },
+                    { name: "Grok", status: true, icon: "Gr" },
+                    { name: "Deepseek", status: true, icon: "D" },
+                    { name: "Google AI", status: false, icon: "GA" },
                   ].map((engine) => (
                     <div key={engine.name} className="flex items-center justify-between rounded-lg border border-white/5 bg-gray-950/40 px-3 py-2">
                       <div className="flex items-center gap-2">
@@ -734,10 +736,12 @@ function QuickScan() {
                   />
                 </div>
                 <div className="mt-4 space-y-1.5 text-left">
-                  <ScanStep label={t.quickScan.step1} done={scanProgress > 25} />
-                  <ScanStep label={t.quickScan.step2} done={scanProgress > 45} />
-                  <ScanStep label={t.quickScan.step3} done={scanProgress > 65} />
-                  <ScanStep label={t.quickScan.step4} done={scanProgress > 85} />
+                  <ScanStep label={t.quickScan.step1} done={scanProgress > 15} />
+                  <ScanStep label={t.quickScan.step2} done={scanProgress > 30} />
+                  <ScanStep label={t.quickScan.step3} done={scanProgress > 45} />
+                  <ScanStep label={t.quickScan.step4} done={scanProgress > 60} />
+                  <ScanStep label={t.quickScan.step5} done={scanProgress > 75} />
+                  <ScanStep label={t.quickScan.step6} done={scanProgress > 88} />
                 </div>
               </div>
             </div>

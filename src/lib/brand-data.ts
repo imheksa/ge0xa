@@ -22,11 +22,13 @@ export function generateData(brand: string) {
 
   const engineBase = [
     { name: "ChatGPT", icon: "G", lastChecked: "2 min ago" },
-    { name: "Perplexity", icon: "P", lastChecked: "5 min ago" },
     { name: "Gemini", icon: "Gm", lastChecked: "3 min ago" },
-    { name: "AI Overviews", icon: "AO", lastChecked: "8 min ago" },
+    { name: "Claude", icon: "C", lastChecked: "4 min ago" },
+    { name: "Grok", icon: "Gr", lastChecked: "5 min ago" },
+    { name: "Deepseek", icon: "D", lastChecked: "6 min ago" },
+    { name: "Google AI", icon: "GA", lastChecked: "8 min ago" },
   ];
-  const missingIdx = s % 4;
+  const missingIdx = s % 6;
   const engines = engineBase.map((e, i) => ({
     ...e,
     status: i === missingIdx ? "not_found" as const : "mentioned" as const,
@@ -35,7 +37,7 @@ export function generateData(brand: string) {
   }));
 
   const severities = ["high", "high", "medium", "low", "medium"];
-  const engineNames = ["ChatGPT", "Perplexity", "Gemini", "AI Overviews"];
+  const engineNames = ["ChatGPT", "Gemini", "Claude", "Grok", "Deepseek", "Google AI"];
   const issueTemplates = [
     `States incorrect founding year for ${brand}`,
     `Claims wrong pricing information about ${brand}`,

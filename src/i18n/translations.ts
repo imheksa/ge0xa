@@ -11,7 +11,7 @@ export const translations = {
       title: "Make sure AI talks about your brand — ",
       titleHighlight: "correctly.",
       subtitle:
-        "Monitor how ChatGPT, Perplexity, Gemini, and Google AI Overviews represent your brand. Detect misinformation. Become the trusted answer.",
+        "Monitor how ChatGPT, Gemini, Claude, Grok, Deepseek, and Google AI represent your brand. Detect misinformation. Become the trusted answer.",
       cta: "Signup Today",
       ctaLoggedIn: "Upgrade Plan",
       ctaSecondary: "See How It Works",
@@ -62,7 +62,7 @@ export const translations = {
       label: "Key Features",
       title: "Built for modern brands",
       f1Title: "Multi-Engine Monitoring",
-      f1Desc: "ChatGPT, Perplexity, Gemini, and Google AI Overviews — all in one dashboard.",
+      f1Desc: "ChatGPT, Gemini, Claude, Grok, Deepseek, and Google AI — all in one dashboard.",
       f2Title: "Canonical Facts",
       f2Desc:
         "Define your brand's source of truth. Get alerted when AI contradicts your official information.",
@@ -90,7 +90,7 @@ export const translations = {
         features: [
           "1 brand monitoring",
           "1 competitor tracking",
-          "Multi-engine scan (4 AI engines)",
+          "Multi-engine scan (6 AI engines)",
           "Basic accuracy audit",
           "Weekly summary report",
         ],
@@ -162,9 +162,11 @@ export const translations = {
       scanSuffix: "across AI engines...",
       progress: "Progress",
       step1: "Querying ChatGPT...",
-      step2: "Querying Perplexity...",
-      step3: "Querying Gemini...",
-      step4: "Analyzing AI Overviews...",
+      step2: "Querying Gemini...",
+      step3: "Querying Claude...",
+      step4: "Querying Grok...",
+      step5: "Querying Deepseek...",
+      step6: "Analyzing Google AI...",
     },
     cta: {
       title: "Is AI telling the truth about your brand?",
@@ -202,7 +204,7 @@ export const translations = {
       title: "Pastikan AI membicarakan brand Anda — ",
       titleHighlight: "dengan benar.",
       subtitle:
-        "Pantau cara ChatGPT, Perplexity, Gemini, dan Google AI Overviews menampilkan brand Anda. Temukan kesalahan. Jadilah jawaban yang dipercaya.",
+        "Pantau cara ChatGPT, Gemini, Claude, Grok, Deepseek, dan Google AI menampilkan brand Anda. Temukan kesalahan. Jadilah jawaban yang dipercaya.",
       cta: "Daftar Sekarang",
       ctaLoggedIn: "Upgrade Paket",
       ctaSecondary: "Lihat Cara Kerjanya",
@@ -253,7 +255,7 @@ export const translations = {
       label: "Fitur Utama",
       title: "Dibangun khusus untuk brand modern",
       f1Title: "Monitoring Multi-Engine",
-      f1Desc: "Pantau ChatGPT, Perplexity, Gemini, dan Google AI Overviews — semuanya dalam satu dashboard.",
+      f1Desc: "Pantau ChatGPT, Gemini, Claude, Grok, Deepseek, dan Google AI — semuanya dalam satu dashboard.",
       f2Title: "Canonical Facts",
       f2Desc:
         "Tentukan fakta resmi brand Anda. Dapatkan notifikasi setiap kali AI menyampaikan informasi yang bertentangan.",
@@ -281,7 +283,7 @@ export const translations = {
         features: [
           "Monitoring 1 brand",
           "Tracking 1 kompetitor",
-          "Scan 4 mesin AI sekaligus",
+          "Scan 6 mesin AI sekaligus",
           "Audit akurasi dasar",
           "Laporan ringkasan mingguan",
         ],
@@ -353,9 +355,11 @@ export const translations = {
       scanSuffix: "di seluruh mesin AI...",
       progress: "Progres",
       step1: "Memindai ChatGPT...",
-      step2: "Memindai Perplexity...",
-      step3: "Memindai Gemini...",
-      step4: "Menganalisis AI Overviews...",
+      step2: "Memindai Gemini...",
+      step3: "Memindai Claude...",
+      step4: "Memindai Grok...",
+      step5: "Memindai Deepseek...",
+      step6: "Menganalisis Google AI...",
     },
     cta: {
       title: "Apakah AI menyampaikan informasi yang benar tentang brand Anda?",
