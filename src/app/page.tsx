@@ -73,6 +73,7 @@ function Navbar() {
 
 function Hero() {
   const { t } = useI18n();
+  const { user } = useAuth();
   return (
     <section className="relative overflow-hidden bg-gray-950 pt-32 pb-24">
       <div className="absolute inset-0 bg-grid animate-grid-fade" />
@@ -93,10 +94,10 @@ function Hero() {
         </p>
         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
           <a
-            href="/ge0xa/login"
+            href={user ? "/ge0xa/brands" : "/ge0xa/login"}
             className="group relative rounded-lg bg-gradient-to-r from-cyan-500 to-violet-500 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all"
           >
-            {t.hero.cta}
+            {user ? t.hero.ctaLoggedIn : t.hero.cta}
           </a>
           <a
             href="#solution"
@@ -274,6 +275,7 @@ function Features() {
 
 function Pricing() {
   const { t } = useI18n();
+  const { user } = useAuth();
   const plans = [
     { ...t.pricing.audit, popular: false },
     { ...t.pricing.foundations, popular: false },
@@ -325,7 +327,7 @@ function Pricing() {
                 ))}
               </ul>
               <a
-                href="#contact"
+                href={user ? "/ge0xa/brands" : "/ge0xa/login"}
                 className={`mt-8 block rounded-lg py-2.5 text-center text-sm font-semibold transition-all ${
                   plan.popular
                     ? "bg-gradient-to-r from-cyan-500 to-violet-500 text-white hover:from-cyan-400 hover:to-violet-400"
@@ -383,19 +385,20 @@ function Industries() {
 
 function CTA() {
   const { t } = useI18n();
+  const { user } = useAuth();
   return (
     <section id="contact" className="relative overflow-hidden border-t border-white/5 bg-gray-950 py-24">
       <div className="absolute inset-0 bg-grid" />
       <div className="absolute top-0 left-1/3 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[200px]" />
       <div className="absolute bottom-0 right-1/3 w-[600px] h-[600px] bg-violet-500/10 rounded-full blur-[200px]" />
       <div className="relative mx-auto max-w-3xl px-6 text-center">
-        <h2 className="text-3xl font-bold text-white sm:text-4xl">{t.cta.title}</h2>
-        <p className="mt-4 text-lg text-gray-400 leading-relaxed">{t.cta.subtitle}</p>
+        <h2 className="text-3xl font-bold text-white sm:text-4xl">{user ? t.cta.titleLoggedIn : t.cta.title}</h2>
+        <p className="mt-4 text-lg text-gray-400 leading-relaxed">{user ? t.cta.subtitleLoggedIn : t.cta.subtitle}</p>
         <a
-          href="/ge0xa/login"
+          href={user ? "/ge0xa/brands" : "/ge0xa/login"}
           className="mt-10 inline-block rounded-lg bg-gradient-to-r from-cyan-500 to-violet-500 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:from-cyan-400 hover:to-violet-400 transition-all"
         >
-          {t.cta.button}
+          {user ? t.cta.buttonLoggedIn : t.cta.button}
         </a>
       </div>
     </section>

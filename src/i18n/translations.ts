@@ -13,6 +13,7 @@ export const translations = {
       subtitle:
         "Monitor how ChatGPT, Perplexity, Gemini, and Google AI Overviews represent your brand. Detect misinformation. Become the trusted answer.",
       cta: "Signup Today",
+      ctaLoggedIn: "Upgrade Plan",
       ctaSecondary: "See How It Works",
     },
     problem: {
@@ -153,9 +154,13 @@ export const translations = {
     },
     cta: {
       title: "Is AI telling the truth about your brand?",
+      titleLoggedIn: "Get deeper insights for your brand",
       subtitle:
         "Sign up now and find out exactly how AI engines see you — and where you're invisible.",
+      subtitleLoggedIn:
+        "Upgrade your plan to unlock more competitor tracking, advanced analytics, and priority support.",
       button: "Signup Today",
+      buttonLoggedIn: "Upgrade Plan",
     },
     footer: {
       tagline: "AI visibility platform for modern brands.",
@@ -185,6 +190,7 @@ export const translations = {
       subtitle:
         "Pantau bagaimana ChatGPT, Perplexity, Gemini, dan Google AI Overviews menampilkan brand Anda. Deteksi misinformasi. Jadilah jawaban terpercaya.",
       cta: "Daftar Sekarang",
+      ctaLoggedIn: "Upgrade Paket",
       ctaSecondary: "Lihat Cara Kerjanya",
     },
     problem: {
@@ -325,9 +331,13 @@ export const translations = {
     },
     cta: {
       title: "Apakah AI menyampaikan kebenaran tentang brand Anda?",
+      titleLoggedIn: "Dapatkan insight lebih dalam untuk brand Anda",
       subtitle:
         "Daftar sekarang dan cari tahu persis bagaimana mesin AI melihat Anda — dan di mana Anda tidak terlihat.",
+      subtitleLoggedIn:
+        "Upgrade paket Anda untuk membuka lebih banyak tracking kompetitor, analitik lanjutan, dan dukungan prioritas.",
       button: "Daftar Sekarang",
+      buttonLoggedIn: "Upgrade Paket",
     },
     footer: {
       tagline: "Platform visibilitas AI untuk brand modern.",
