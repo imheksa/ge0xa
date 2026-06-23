@@ -17,7 +17,7 @@ function Navbar() {
   const { user, loading } = useAuth();
   return (
     <nav className="fixed top-0 z-50 w-full border-b border-white/5 bg-gray-950/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
+      <div className="mx-auto flex h-16 items-center justify-between px-6 sm:px-10 lg:px-16 xl:px-24">
         <a href="#" className="flex items-center gap-2 text-xl font-bold tracking-tight">
           <HexIcon className="w-6 h-6 text-cyan-400" />
           <span>
@@ -80,7 +80,7 @@ function Hero() {
       <div className="absolute top-20 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[128px]" />
       <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-violet-500/10 rounded-full blur-[128px]" />
 
-      <div className="relative mx-auto max-w-7xl px-6 text-center">
+      <div className="relative mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 text-center">
         <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/5 px-4 py-1.5 text-sm font-mono text-cyan-400">
           <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse-glow" />
           {t.hero.tagline}
@@ -132,7 +132,7 @@ function Problem() {
   return (
     <section className="relative bg-gray-950 py-24 border-t border-white/5">
       <div className="absolute inset-0 bg-dot-pattern opacity-30" />
-      <div className="relative mx-auto max-w-7xl px-6">
+      <div className="relative mx-auto px-6 sm:px-10 lg:px-16 xl:px-24">
         <div className="text-center">
           <span className="font-mono text-xs font-semibold uppercase tracking-widest text-red-400">
             {t.problem.label}
@@ -176,7 +176,7 @@ function Solution() {
   };
   return (
     <section id="solution" className="relative bg-gray-950 py-24 border-t border-white/5">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto px-6 sm:px-10 lg:px-16 xl:px-24">
         <div className="text-center">
           <span className="font-mono text-xs font-semibold uppercase tracking-widest text-cyan-400">
             {t.solution.label}
@@ -215,7 +215,7 @@ function Metrics() {
   return (
     <section className="relative border-y border-white/5 bg-gray-900/50 py-20">
       <div className="absolute inset-0 bg-grid opacity-50" />
-      <div className="relative mx-auto max-w-7xl px-6">
+      <div className="relative mx-auto px-6 sm:px-10 lg:px-16 xl:px-24">
         <h2 className="text-center text-2xl font-bold text-white sm:text-3xl">
           {t.metrics.title}
         </h2>
@@ -245,7 +245,7 @@ function Features() {
   ];
   return (
     <section id="features" className="relative bg-gray-950 py-24 border-t border-white/5">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto px-6 sm:px-10 lg:px-16 xl:px-24">
         <div className="text-center">
           <span className="font-mono text-xs font-semibold uppercase tracking-widest text-cyan-400">
             {t.features.label}
@@ -285,7 +285,7 @@ function Pricing() {
   return (
     <section id="pricing" className="relative bg-gray-950 py-24 border-t border-white/5">
       <div className="absolute inset-0 bg-dot-pattern opacity-20" />
-      <div className="relative mx-auto max-w-7xl px-6">
+      <div className="relative mx-auto px-6 sm:px-10 lg:px-16 xl:px-24">
         <div className="text-center">
           <span className="font-mono text-xs font-semibold uppercase tracking-widest text-cyan-400">
             {t.pricing.label}
@@ -356,7 +356,7 @@ function Industries() {
   ];
   return (
     <section className="relative bg-gray-950 py-24 border-t border-white/5">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto px-6 sm:px-10 lg:px-16 xl:px-24">
         <div className="text-center">
           <span className="font-mono text-xs font-semibold uppercase tracking-widest text-cyan-400">
             {t.industries.label}
@@ -409,7 +409,7 @@ function Footer() {
   const { t } = useI18n();
   return (
     <footer className="border-t border-white/5 bg-gray-950 py-12">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto px-6 sm:px-10 lg:px-16 xl:px-24">
         <div className="grid gap-8 md:grid-cols-4">
           <div className="md:col-span-2">
             <span className="flex items-center gap-2 text-xl font-bold tracking-tight">
